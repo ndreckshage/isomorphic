@@ -12,6 +12,9 @@
     "type": "git",
     "url": "https://github.com/frontendperformance/isomorphic.git"
   },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
   "keywords": [
     "cli",
     "iso",
@@ -19,7 +22,7 @@
     "react",
     "flux"
   ],
-  "author": "Nick Dreckshage",
+  "author": "Nick Dreckshage and isomorphic contributors",
   "licenses": [
     {
       "type": "MIT",
