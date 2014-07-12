@@ -1,0 +1,32 @@
+{
+  "name": "isomorphic",
+  "version": "0.0.0",
+  "description": "command line utility for isomorphic webapps",
+  "bin": {
+    "isomorphic": "./bin/isomorphic"
+  },
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/frontendperformance/isomorphic.git"
+  },
+  "keywords": [
+    "cli",
+    "iso",
+    "isomorphic",
+    "react",
+    "flux"
+  ],
+  "author": "Nick Dreckshage",
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://raw.github.com/frontendperformance/isomorphic/master/LICENSE"
+    }
+  ],
+  "bugs": {
+    "url": "https://github.com/frontendperformance/isomorphic/issues"
+  }
+}
