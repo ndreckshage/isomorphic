@@ -1,0 +1,25 @@
+{
+  "name": "NAME",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "test": "jest"
+  },
+  "engines": {
+    "node": ">= 0.10.0"
+  },
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "bower": "^1.3.8",
+    "express": "^4.6.1",
+    "isomorphic": "VERSION",
+    "jest-cli": "^0.1.17",
+    "react": "^0.10.0",
+    "react-tools": "^0.10.0"
+  },
+  "jest": {
+    "scriptPreprocessor": "<rootDir>/node_modules/isomorphic/lib/jsx-jest-preprocessor.js",
+    "unmockedModulePathPatterns": ["<rootDir>/node_modules/react"]
+  }
+}

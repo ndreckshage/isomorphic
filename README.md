@@ -35,13 +35,12 @@ command line utility for isomorphic webapps with [react](http://facebook.github.
 - [gulp](http://gulpjs.com/)
 - [bower](http://bower.io/)
 
-*inspired by [ember-cli](https://github.com/stefanpenner/ember-cli).*
-
 ###goals
 
-- Conveniently piece together a few excellent (but simple) open source projects (listed above), rather than reinventing the wheel.
-- Provide initial structure for isomorphic applications (client / server).
-- Provide a simple command line interface + build tool to ease development.
+- Conveniently piece together a few excellent (but simple) open source projects (listed above).
+- Provide simple command line interface to scaffold out initial structure (client / server).
+- Don't reinvent the wheel. Use great existing CLI for build (Gulp) + existing libraries (listed above).
+- Setup project. Sane build (Gulp) defaults; Express configuration; Flux architecture components.
 - **Gold** standard in performance. Initial page load + SEO. Single page app on client. Small, simple libraries with minimal dependencies (**no jQuery**).
 
 > "WHY SO MANY FACEBOOK TOOLS????" -- [Creator of Yet Another Framework](http://blog.tastejs.com/yet-another-framework-syndrome-yafs)
@@ -52,38 +51,19 @@ command line utility for isomorphic webapps with [react](http://facebook.github.
 
 *^^^ Opinionated -- decide for yourself.*
 
+###install
+
+```sh
+npm install -g isomorphic
+```
+
 ###executable
 
 ```sh
-isomorphic new {app-name}
-  # Creates a new folder and runs isomorphic init in it.
-isomorphic init {app-name}
-  # Creates a new isomorphic project in the current folder.
-  aliases: i
-isomorphic serve {--options}
-  # Builds and serves your app, rebuilding on file changes.
-  aliases: server, s
-  --port (Default: 4200)
-  --host (Default: 0.0.0.0)
-  --live-reload (Default: true)
-  --environment (Default: development)
-  --output-path (Default: dist/)
-isomorphic build {--options}
-  # Builds your app and places it into the output path (dist/ by default).
-  --environment (Default: development)
-  --output-path (Default: dist/)
-isomorphic help {name}
-  # Outputs the usage instructions for all commands or the provided command
-  aliases: h, -h, --help
-isomorphic test
-  # Runs your apps test suite.
-  aliases: t
-isomorphic version
-  # outputs isomorphic version
-  aliases: v, -v, --version
+isomorphic {app-name}
 ```
 
-###wrapper
+###wrapper *optional*
 
 ```javascript
 var isomorphic = require('isomorphic');
@@ -106,11 +86,10 @@ var isomorphic = require('isomorphic');
   app/stores/*      # flux architecture
   assets/*          # css, images, fonts
   vendor/*          # bower generated
-  api.json          # settings to interact with api endpoint
   bower.json        # manage vendor assets
+  environment.json  # environment / API settings
   gulpfile.js       # manage build
   package.json      # manage npm
   .gitignore
-  .travis
   .jshintrc
 ```

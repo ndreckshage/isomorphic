@@ -31,5 +31,9 @@
   ],
   "bugs": {
     "url": "https://github.com/frontendperformance/isomorphic/issues"
+  },
+  "dependencies": {
+    "commander": "^2.2.0",
+    "ncp": "^0.6.0"
   }
 }
