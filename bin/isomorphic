@@ -15,20 +15,23 @@ program
   .parse(process.argv);
 
 var destination = program.args.shift() || '.';
-emptyDirectory(destination, function (empty) {
-  if (empty) {
-    createApplicationAt(path);
-  } else {
-    program.confirm('destination is not empty, continue? ', function (ok) {
-      if (ok) {
-        process.stdin.destroy();
-        createApplicationAt(path);
-      } else {
-        abort('aborting');
-      }
-    });
-  }
-});
+
+// CONFIRM NO LONGER IN COMMANDER
+
+// emptyDirectory(destination, function (empty) {
+//   if (empty) {
+//     createApplicationAt(path);
+//   } else {
+//     program.confirm('destination is not empty, continue? ', function (ok) {
+//       if (ok) {
+//         process.stdin.destroy();
+//         createApplicationAt(path);
+//       } else {
+//         abort('aborting');
+//       }
+//     });
+//   }
+// });
 
 /**
  */
