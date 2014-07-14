@@ -25,13 +25,17 @@ gulp.task('browserify', function() {
 		extensions: ['.coffee', '.hbs']
 	});
 
-	var templates = fs.readdirSync('./app/views/');
-	templates.forEach(function (template) {
-		template = 'app/views/' + template;
-	  bundler.require('./' + template, {
-	  	expose: template
-	  })
-	});
+	// var templates = fs.readdirSync('./app/views/');
+	// templates.forEach(function (template) {
+	// 	template = 'app/views/' + template;
+	//   bundler.require('./' + template, {
+	//   	expose: template
+	//   })
+	// });
+
+	bundler.require('./app/views/layout.hbs', {
+		expose: 'app/views/layout.hbs'
+	})
 
 	var bundle = function() {
 		// Log when bundling starts

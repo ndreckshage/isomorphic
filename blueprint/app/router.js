@@ -1,13 +1,11 @@
 var director = require('director')
   , isServer = typeof window === 'undefined'
-  , Handlebars = isServer ? require('handlebars') : require('hbsfy/runtime')
+  , Handlebars = require('handlebars')
+  , React = require('react')
   , viewsDir = (isServer ? __dirname : 'app') + '/views'
   , DirectorRouter = isServer ? director.http.Router : director.Router
   , firstRender = true
 ;
-
-// Register Handlebars Helpers
-require('./helpers')(Handlebars).register();
 
 module.exports = Router;
 
@@ -95,9 +93,8 @@ Router.prototype.handleErr = function(err) {
 
 Router.prototype.renderView = function(viewPath, data, callback) {
   try {
-    var template = require(viewsDir + '/' + viewPath + '.hbs')
-      , html = template(data)
-    ;
+    var Component = require(viewsDir + '/' + viewPath);
+    var html = React.renderComponentToString(Component(data));
     callback(null, html);
   } catch (err) {
     callback(err);
@@ -120,13 +117,8 @@ Router.prototype.handleClientRoute = function(viewPath, html) {
 };
 
 Router.prototype.handleServerRoute = function(viewPath, html, req, res) {
-  // Any objects we want to serialize to the client on pageload.
-  var bootstrappedData = {
-  };
-
   var locals = {
-    body: html,
-    bootstrappedData: JSON.stringify(bootstrappedData),
+    body: html
   };
 
   this.wrapWithLayout(locals, function(err, layoutHtml) {
