@@ -55,13 +55,13 @@ Router.prototype.getRouteHandler = function(handler) {
         data = data || {};
         data.renderer = isServer ? 'server' : 'client';
 
-        router.renderView(viewPath, data, function(err, html) {
+        router.renderView(viewPath, data, function(err, component) {
           if (err) return handleErr(err);
 
           if (isServer) {
-            router.handleServerRoute(html, routeContext.req, routeContext.res);
+            router.handleServerRoute(component, routeContext.req, routeContext.res);
           } else {
-            router.handleClientRoute(viewPath, html);
+            router.handleClientRoute(component);
           }
         });
       }));
@@ -89,18 +89,18 @@ Router.prototype.handleErr = function(err) {
 Router.prototype.renderView = function(viewPath, data, callback) {
   try {
     var Component = require(viewsDir + '/' + viewPath);
-    var html = React.renderComponentToString(Component(data));
-    callback(null, html);
+    callback(null, Component(data));
   } catch (err) {
     callback(err);
   }
 };
 
-Router.prototype.handleClientRoute = function(viewPath, html) {
-  document.getElementById('view-container').innerHTML = html;
+Router.prototype.handleClientRoute = function(component) {
+  React.renderComponent(component, document.getElementById('view-container'));
 };
 
-Router.prototype.handleServerRoute = function (html, req, res) {
+Router.prototype.handleServerRoute = function (component, req, res) {
+  var html = React.renderComponentToString(component);
   res.render('index', { body: html });
 };
 
