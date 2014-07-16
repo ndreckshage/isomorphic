@@ -24,7 +24,9 @@ command line utility for isomorphic webapps with [react](http://facebook.github.
 - [flux](http://facebook.github.io/react/docs/flux-overview.html) -- *architecture*
 - [director](https://github.com/flatiron/director) -- *routes*
 - [superagent](https://github.com/visionmedia/superagent) -- *ajax*
+
 - [express](http://expressjs.com/) -- *server*
+- [stylus](http://learnboost.github.io/stylus/) -- *css*
 
 ######testing
 
@@ -59,17 +61,40 @@ npm install -g isomorphic
 
 ###executable
 
+###### IMPORTANT: isomorphic serve / build proxy to gulp as a convenience. gulp can still be used directly.
+
 ```sh
-isomorphic {app-name}
+isomorphic new {app-name}
+  # Creates a new folder and runs isomorphic init in it.
+isomorphic init {app-name}
+  # Creates a new isomorphic project in the current folder.
+  aliases: i
+isomorphic serve {--options}
+  # Builds and serves your app, rebuilding on file changes.
+  aliases: server, s
+  --environment (Default: development)
+isomorphic build {--options}
+  # Builds your app and places it into the output path (dist/ by default).
+  --environment (Default: development)
+isomorphic help {name}
+  # Outputs the usage instructions for all commands or the provided command
+  aliases: h, -h, --help
+isomorphic test
+  # Runs your apps test suite.
+  aliases: t
+isomorphic version
+  # outputs isomorphic version
+  aliases: v, -v, --version
 ```
 
-###wrapper *optional*
+###wrapper
 
 ```javascript
 var isomorphic = require('isomorphic');
-// isomorphic.react
-// isomorphic.director
-// isomorphic.superagent
+isomorphic.React;
+isomorphic.Router; // Director
+isomorphic.Request; // SuperAgent
+isomorphic.Dispatcher;
 ```
 
 ###folder structure

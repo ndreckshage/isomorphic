@@ -12,9 +12,10 @@ var pkg = require('../package.json'),
 program
   .version(version)
   .usage('[options] [dir]')
+  .option('-e, --environment', 'Add bbq sauce')
   .parse(process.argv);
 
-var destination = program.args.shift() || '.';
+// var destination = program.args.shift() || '.';
 
 // CONFIRM NO LONGER IN COMMANDER
 
@@ -32,48 +33,48 @@ var destination = program.args.shift() || '.';
 //     });
 //   }
 // });
-
-/**
- */
-
-function createApplicationAt (path) {
-  var blueprint = path.resolve(path.join(__dirname, "..", "blueprint"));
-  ncp(blueprint, destination, function (err) {
-   if (err) {
-     return console.error(err);
-   } else {
-     installApplication(path);
-   }
-  });
-}
-
-/**
- */
-
-function installApplication (path) {
-  console.log(path)
-  // exec('cd ' + path + ' && npm install',
-  //   function (error, stdout, stderr) {
-  //     console.log('stdout: ' + stdout);
-  //     console.log('stderr: ' + stderr);
-  //     if (error !== null) {
-  //       console.log('exec error: ' + error);
-  //     }
-  // });
-}
-
-/**
- * Check if the given directory `path` is empty.
- *
- * @param {String} path
- * @param {Function} fn
- */
-
-function emptyDirectory (path, fn) {
-  fs.readdir(path, function (err, files) {
-    if (err && 'ENOENT' != err.code) {
-      throw err;
-    }
-    fn(!files || !files.length);
-  });
-}
+//
+// /**
+//  */
+//
+// function createApplicationAt (path) {
+//   var blueprint = path.resolve(path.join(__dirname, "..", "blueprint"));
+//   ncp(blueprint, destination, function (err) {
+//    if (err) {
+//      return console.error(err);
+//    } else {
+//      installApplication(path);
+//    }
+//   });
+// }
+//
+// /**
+//  */
+//
+// function installApplication (path) {
+//   console.log(path)
+//   // exec('cd ' + path + ' && npm install',
+//   //   function (error, stdout, stderr) {
+//   //     console.log('stdout: ' + stdout);
+//   //     console.log('stderr: ' + stderr);
+//   //     if (error !== null) {
+//   //       console.log('exec error: ' + error);
+//   //     }
+//   // });
+// }
+//
+// /**
+//  * Check if the given directory `path` is empty.
+//  *
+//  * @param {String} path
+//  * @param {Function} fn
+//  */
+//
+// function emptyDirectory (path, fn) {
+//   fs.readdir(path, function (err, files) {
+//     if (err && 'ENOENT' != err.code) {
+//       throw err;
+//     }
+//     fn(!files || !files.length);
+//   });
+// }
