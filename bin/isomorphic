@@ -1,80 +1,78 @@
 #!/usr/bin/env node
 
-var program = require('commander'),
-    exec = require('child_process').exec,
-    path = require('path'),
-    ncp = require('ncp').ncp,
-    fs = require('fs');
+var args = require('minimist')(process.argv.slice(2));
+var cwd = require('shelljs').pwd();
+var ncp = require('ncp').ncp;
+var path = require('path');
+var fs = require('fs');
 
-var pkg = require('../package.json'),
-    version = pkg.version;
+// var sys = require('sys');
+// var spawn = require('child_process').spawn;
+// var exec = require('child_process').exec;
+// var prompt = require('prompt');
 
-program
-  .version(version)
-  .usage('[options] [dir]')
-  .option('-e, --environment', 'Add bbq sauce')
-  .parse(process.argv);
+var pkg = require('../package.json');
+var version = pkg.version;
 
-// var destination = program.args.shift() || '.';
+var validCommands = {
+  NEW: 'new'
+};
 
-// CONFIRM NO LONGER IN COMMANDER
+switch (args._[0]) {
+case validCommands.NEW:
+  createApplicationAt(args._[1]);
+  break;
+default:
+  console.log('Please enter a valid argument.')
+}
 
-// emptyDirectory(destination, function (empty) {
-//   if (empty) {
-//     createApplicationAt(path);
-//   } else {
-//     program.confirm('destination is not empty, continue? ', function (ok) {
-//       if (ok) {
-//         process.stdin.destroy();
-//         createApplicationAt(path);
-//       } else {
-//         abort('aborting');
-//       }
-//     });
-//   }
-// });
-//
-// /**
-//  */
-//
-// function createApplicationAt (path) {
-//   var blueprint = path.resolve(path.join(__dirname, "..", "blueprint"));
-//   ncp(blueprint, destination, function (err) {
-//    if (err) {
-//      return console.error(err);
-//    } else {
-//      installApplication(path);
-//    }
-//   });
-// }
-//
-// /**
-//  */
-//
-// function installApplication (path) {
-//   console.log(path)
-//   // exec('cd ' + path + ' && npm install',
-//   //   function (error, stdout, stderr) {
-//   //     console.log('stdout: ' + stdout);
-//   //     console.log('stderr: ' + stderr);
-//   //     if (error !== null) {
-//   //       console.log('exec error: ' + error);
-//   //     }
-//   // });
-// }
-//
-// /**
-//  * Check if the given directory `path` is empty.
-//  *
-//  * @param {String} path
-//  * @param {Function} fn
-//  */
-//
-// function emptyDirectory (path, fn) {
-//   fs.readdir(path, function (err, files) {
-//     if (err && 'ENOENT' != err.code) {
-//       throw err;
-//     }
-//     fn(!files || !files.length);
-//   });
-// }
+/**
+ * Create new isomorphic application
+ *
+ * @param {String} location
+ */
+function createApplicationAt (target) {
+  if (target) {
+    target = path.join(cwd, target);
+    emptyDirectory(target, function (empty) {
+      if (empty) {
+        installApplicationAt(target);
+      } else {
+        console.log(target + ' already exists.')
+      }
+    });
+  } else {
+    console.log('Must name application.')
+  }
+}
+
+/**
+ * Check if the given directory `path` is empty.
+ *
+ * @param {String} path
+ * @param {Function} fn
+ */
+function emptyDirectory (path, fn) {
+  fs.readdir(path, function (err, files) {
+    if (err && 'ENOENT' != err.code) {
+      throw err;
+    }
+    fn(!files || !files.length);
+  });
+}
+
+/**
+ * Copies files from blueprint to new application path.
+ *
+ * @param {String} destination
+ */
+function installApplicationAt (destination) {
+  var blueprint = path.resolve(path.join(__dirname, '..', 'blueprint'));
+  ncp(blueprint, destination, function (err) {
+   if (err) {
+     return console.error(err);
+   } else {
+     console.log('worked');
+   }
+  });
+}

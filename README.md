@@ -21,7 +21,7 @@ command line utility for isomorphic webapps with [react](http://facebook.github.
 ###libraries / tools
 
 - [react](http://facebook.github.io/react/) -- *ui*
-- [flux](http://facebook.github.io/react/docs/flux-overview.html) -- *architecture*
+- [flux](http://facebook.github.io/flux/) -- *architecture*
 - [director](https://github.com/flatiron/director) -- *routes*
 - [superagent](https://github.com/visionmedia/superagent) -- *ajax*
 
@@ -48,7 +48,7 @@ command line utility for isomorphic webapps with [react](http://facebook.github.
 > "WHY SO MANY FACEBOOK TOOLS????" -- [Creator of Yet Another Framework](http://blog.tastejs.com/yet-another-framework-syndrome-yafs)
 
 - [react](http://facebook.github.io/react/) -- extremely impressive^^^, high performant library. It is a new way of thinking about the DOM, and is a viable jQuery replacement.
-- [flux](http://facebook.github.io/react/docs/flux-overview.html) -- Flux is a simple architecture pattern, not a framework. I have worked on many large single page applications with several of the largest libraries. They are great, but can be overly complex^^^ and bloated^^^. Facebook has not released 'Flux', but outlined it as an architecture pattern. There is something to be said for simplicity^^^, and this uses that model.
+- [flux](http://facebook.github.io/flux/) -- Flux is a simple architecture pattern, not a framework. I have worked on many large single page applications with several of the largest libraries. They are great, but can be overly complex^^^ and bloated^^^. There is something to be said for simplicity^^^, and this uses that model.
 - [jest](http://facebook.github.io/jest/): great^^^ addition to an already great^^^ test framework ([jasmine](http://jasmine.github.io/))
 
 *^^^ Opinionated -- decide for yourself.*
@@ -61,21 +61,12 @@ npm install -g isomorphic
 
 ###executable
 
-###### IMPORTANT: isomorphic serve / build proxy to gulp as a convenience. gulp can still be used directly.
-
 ```sh
 isomorphic new {app-name}
   # Creates a new folder and runs isomorphic init in it.
 isomorphic init {app-name}
   # Creates a new isomorphic project in the current folder.
   aliases: i
-isomorphic serve {--options}
-  # Builds and serves your app, rebuilding on file changes.
-  aliases: server, s
-  --environment (Default: development)
-isomorphic build {--options}
-  # Builds your app and places it into the output path (dist/ by default).
-  --environment (Default: development)
 isomorphic help {name}
   # Outputs the usage instructions for all commands or the provided command
   aliases: h, -h, --help
@@ -85,6 +76,18 @@ isomorphic test
 isomorphic version
   # outputs isomorphic version
   aliases: v, -v, --version
+```
+
+###### gulp based build
+
+```sh
+gulp
+gulp server
+  # Builds and serves your app, rebuilding on file changes.
+gulp build {--options}
+  # Builds your app and places it into the output path (dist/ by default).
+  --environment (Default: development)
+
 ```
 
 ###wrapper
