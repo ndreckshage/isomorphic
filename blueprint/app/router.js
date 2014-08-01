@@ -1,7 +1,7 @@
 var director = require('director');
 var isServer = typeof window === 'undefined';
 var React = require('react');
-var viewsDir = (isServer ? __dirname : 'app') + '/views';
+var componentsDir = (isServer ? __dirname : 'app') + '/components';
 var DirectorRouter = isServer ? director.http.Router : director.Router;
 var firstRender = true;
 
@@ -88,7 +88,7 @@ Router.prototype.handleErr = function(err) {
 
 Router.prototype.renderView = function(viewPath, data, callback) {
   try {
-    var Component = require(viewsDir + '/' + viewPath);
+    var Component = require(componentsDir + '/' + viewPath);
     callback(null, Component(data));
   } catch (err) {
     callback(err);

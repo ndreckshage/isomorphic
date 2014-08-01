@@ -54,7 +54,7 @@ function createApplicationAt (target) {
  */
 function emptyDirectory (path, fn) {
   fs.readdir(path, function (err, files) {
-    if (err && 'ENOENT' != err.code) {
+    if (err && err.code != 'ENOENT') {
       throw err;
     }
     fn(!files || !files.length);

@@ -9,12 +9,13 @@ var browserify = require('browserify'),
 gulp.task('browserify', function() {
 	var bundleMethod = global.isWatching ? watchify : browserify;
 	var bundler = bundleMethod({
-		entries: ['./app/entry.js']
+		entries: ['./app/entry.js'],
+		debug: true
 	});
 
-	var templates = fs.readdirSync('./app/views/');
+	var templates = fs.readdirSync('./app/components/');
 	templates.forEach(function (template) {
-		template = 'app/views/' + template;
+		template = 'app/components/' + template;
 	  bundler.require('./' + template, {
 	  	expose: template.split('.')[0]
 	  })
@@ -23,14 +24,14 @@ gulp.task('browserify', function() {
 	var bundle = function() {
 		bundleLogger.start();
 		return bundler
-			.bundle({debug: true})
+			.bundle()
 			.on('error', handleErrors)
 			.pipe(source('scripts.js'))
 			.pipe(gulp.dest('./public/'))
 			.on('end', bundleLogger.end);
 	};
 
-	if(global.isWatching) {
+	if (global.isWatching) {
 		bundler.on('update', bundle);
 	}
 

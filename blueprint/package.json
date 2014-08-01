@@ -10,31 +10,33 @@
     ]
   },
   "dependencies": {
+    "react": "~0.11.1",
+    "react-tools": "~0.11.1",
+    "node-jsx": "~0.11.0",
+    "reactify": "~0.14.0",
+
     "superagent": "~0.18.2",
-    "express": "~4.6.1",
-    "body-parser": "~1.4.3",
     "director": "~1.2.3",
+
+    "express": "~4.7.2",
+    "body-parser": "~1.5.2",
     "underscore": "~1.6.0",
-    "http-proxy": "~1.1.5",
-    "react": "~0.10.0",
-    "react-tools": "~0.10.0",
-    "reactify": "~0.13.1",
-    "node-jsx": "~0.10.0",
-    "jade": "~1.3.1"
+    "http-proxy": "~1.1.6",
+    "jade": "~1.5.0"
   },
   "devDependencies": {
-    "browserify": "~4.2.0",
+    "browserify": "~5.9.1",
     "gulp": "~3.8.6",
-    "gulp-stylus": "~1.0.5",
+    "gulp-stylus": "~1.3.0",
     "gulp-nodemon": "~1.0.4",
     "gulp-rename": "~1.2.0",
-    "gulp-concat": "~2.3.3",
-    "gulp-changed": "~0.4.0",
-    "gulp-imagemin": "~0.6.1",
-    "gulp-util": "~2.2.14",
-    "gulp-notify": "~1.2.4",
+    "gulp-concat": "~2.3.4",
+    "gulp-changed": "~0.4.1",
+    "gulp-imagemin": "~0.6.2",
+    "gulp-util": "~3.0.0",
+    "gulp-notify": "~1.4.1",
     "pretty-hrtime": "~0.2.1",
     "vinyl-source-stream": "~0.1.1",
-    "watchify": "~0.10.2"
+    "watchify": "~1.0.1"
   }
 }
