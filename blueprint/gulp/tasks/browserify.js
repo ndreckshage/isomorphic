@@ -9,7 +9,6 @@ var browserify = require('browserify'),
 var recursiveWalk = require('./../../app/__isomorphic_util_walk');
 var routes = recursiveWalk('./app/routes');
 var components = recursiveWalk('./app/components');
-var insert = require('gulp-insert');
 
 var exposedRoutes = [];
 routes.forEach(function (route) {

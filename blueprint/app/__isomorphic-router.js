@@ -89,7 +89,7 @@ Router.prototype.handleErr = function(err) {
 
 Router.prototype.renderView = function(viewPath, data, callback) {
   try {
-    var Component = require(componentsDir + '/' + viewPath);
+    var Component = require(path.join(componentsDir, viewPath));
     callback(null, Component(data));
   } catch (err) {
     callback(err);

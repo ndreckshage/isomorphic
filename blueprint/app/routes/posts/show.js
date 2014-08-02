@@ -7,6 +7,6 @@ module.exports = function (id, callback) {
     if (err) return callback(err);
 
     var post = res.body;
-    callback(null, 'post', post);
+    callback(null, 'posts/show', post);
   });
 };

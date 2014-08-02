@@ -9,7 +9,7 @@ module.exports = function (callback) {
     }
 
     var posts = res.body;
-    callback(null, 'posts', {
+    callback(null, 'posts/index', {
       posts: posts
     });
   });
