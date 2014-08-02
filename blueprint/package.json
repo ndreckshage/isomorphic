@@ -10,6 +10,8 @@
     ]
   },
   "dependencies": {
+    "isomorphic" : "~0.0.0",
+
     "react": "~0.11.1",
     "react-tools": "~0.11.1",
     "node-jsx": "~0.11.0",
@@ -33,6 +35,7 @@
     "gulp-concat": "~2.3.4",
     "gulp-changed": "~0.4.1",
     "gulp-imagemin": "~0.6.2",
+    "gulp-insert": "~0.4.0",
     "gulp-util": "~3.0.0",
     "gulp-notify": "~1.4.1",
     "pretty-hrtime": "~0.2.1",
