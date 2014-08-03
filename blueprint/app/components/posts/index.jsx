@@ -1,8 +1,7 @@
 /**
  * @jsx React.DOM
  */
-var React = require('react');
-
+var React = require('isomorphic').React;
 module.exports = React.createClass({
   render: function() {
     return (

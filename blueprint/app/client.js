@@ -1,5 +1,4 @@
-var Router = require('./__isomorphic-router');
-var routes = require('./router');
-var router = new Router(routes);
+var isomorphic = require('isomorphic');
+var router = new isomorphic.Router(require('./router'));
 window.router = router;
 router.start();

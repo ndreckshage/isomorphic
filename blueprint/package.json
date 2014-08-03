@@ -12,13 +12,8 @@
   "dependencies": {
     "isomorphic" : "~0.0.0",
 
-    "react": "~0.11.1",
-    "react-tools": "~0.11.1",
-    "node-jsx": "~0.11.0",
     "reactify": "~0.14.0",
-
     "superagent": "~0.18.2",
-    "director": "~1.2.3",
 
     "express": "~4.7.2",
     "body-parser": "~1.5.2",
