@@ -12,6 +12,7 @@
   "dependencies": {
     "isomorphic" : "~0.0.0",
 
+    "node-jsx": "~0.11.0",
     "reactify": "~0.14.0",
     "superagent": "~0.18.2",
 
