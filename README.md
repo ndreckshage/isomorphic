@@ -1,22 +1,41 @@
 #isomorphic
 
-####WORK IN PROGRESS! INCOMPLETE!!
+###_WORK IN PROGRESS! INCOMPLETE!!_
 
-command line utility for isomorphic webapps with [react](http://facebook.github.io/react/) / [flux](http://facebook.github.io/react/docs/flux-overview.html).
+command line interface for building isomorphic webapps using [react](http://facebook.github.io/react/) + [flux](http://facebook.github.io/flux/).
+
+```sh
+npm install -g isomorphic
+isomorphic new your-app # and then open up a web browser
+```
 
 ###what?
 
 - *'traditional' websites* (server rendered) provide SEO and initial page load performance.
-- *'traditional' webapps* (client rendered; 'MVx') provide a much improved user experience, and are much faster after the initial page load. But, they struggle with SEO and initial page load performance (without jumping through hoops).
+- *'traditional' webapps* (client rendered; MVx) provide a much improved user experience, and are much faster after the initial page load. but, they struggle with SEO and initial page load performance (without jumping through hoops).
 
-[isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) webapps provide the best of both worlds. they are single page applications, that render on both the server and client (using [nodejs](http://nodejs.org/)). The server first renders HTML, and then the client kicks in -- providing SEO and initial page load performance by default, without having to duplicate templates, or 'jump through hoops'.
+[isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) webapps are the holy grail. they are single page applications, that render on both the client **and** server (using [nodejs](http://nodejs.org/)). the server first renders HTML, and then the client kicks in -- providing a client side application, SEO and initial page load performance by **default**.
+
+###hypothesis / goals
+
+many developers have a knee jerk reaction to node.js, and roll their eyes at the idea of having their entire stack in javascript. while i don't necessarily agree, i believe it is a valid critique. but luckily, it is not required to take advantage of isomorphic concepts.
 
 > "MY SERVER WILL NEVER BE IN NODE AND I WILL NEVER USE MONGO." -- [PHP CEO](https://twitter.com/PHP_CEO)
 
-- No problem. This CLI disconnects your frontend server from your backend server.
-- Your clientside application **and** Node server interact with a language agnostic, backend API.
+- no problem. this CLI disconnects your frontend server from your backend server.
+- your client side application **and** node server interact with a language agnostic API.
 
-...your backend server can of course still be in Node, and you can still use Mongo.
+...your backend server can of course still be in node, and you can still use mongo.
+
+i believe that a frontend server in node that interacts with a backend, language agnostic API is an intuitive concept that will make node.js more feasible for many engineering teams.
+
+######goals
+
+- **gold standard in performance**. the ultimate goal of this project is to help people create the highest performant websites by todays standards. initial page load speed. snappy, client side application. small, carefully chosen libraries with minimal dependencies (**no** jQuery...).
+- disconnect the frontend server from the data layer. the client and server can interact with an API. *complete application can be developed within this project though if desired.*
+- conveniently piece together a few excellent (but simple) open source projects (listed below). no reinventing of wheels.
+- simple command line interface to scaffold out + build upon initial structure.
+- sane defaults -- build tools; app structure; library configuration.
 
 ###libraries / tools
 
@@ -24,42 +43,21 @@ command line utility for isomorphic webapps with [react](http://facebook.github.
 - [flux](http://facebook.github.io/flux/) -- *architecture*
 - [director](https://github.com/flatiron/director) -- *routes*
 - [superagent](https://github.com/visionmedia/superagent) -- *ajax*
-
 - [express](http://expressjs.com/) -- *server*
 - [stylus](http://learnboost.github.io/stylus/) -- *css*
-
-######testing
-
-- [jest](http://facebook.github.io/jest/) ([jasmine](http://jasmine.github.io/))
-
-######build
-
-- [gulp](http://gulpjs.com/)
-- [bower](http://bower.io/)
-
-###goals
-
-- Conveniently piece together a few excellent (but simple) open source projects (listed above).
-- Provide simple command line interface to scaffold out initial structure (client / server).
-- Don't reinvent the wheel. Use great existing CLI for build (Gulp) + existing libraries (listed above).
-- Setup project. Sane build (Gulp) defaults; Express configuration; Flux architecture components.
-- **Gold** standard in performance. Initial page load + SEO. Single page app on client. Small, simple libraries with minimal dependencies (**no jQuery**).
+- [jest](http://facebook.github.io/jest/) (with [jasmine](http://jasmine.github.io/)) -- *testing*
+- [browserify](https://github.com/substack/node-browserify) -- *commonjs*
+- [gulp](http://gulpjs.com/) -- *build*
 
 > "WHY SO MANY FACEBOOK TOOLS????" -- [Creator of Yet Another Framework](http://blog.tastejs.com/yet-another-framework-syndrome-yafs)
 
-- [react](http://facebook.github.io/react/) -- extremely impressive^^^, high performant library. It is a new way of thinking about the DOM, and is a viable jQuery replacement.
-- [flux](http://facebook.github.io/flux/) -- Flux is a simple architecture pattern, not a framework. I have worked on many large single page applications with several of the largest libraries. They are great, but can be overly complex^^^ and bloated^^^. There is something to be said for simplicity^^^, and this uses that model.
+- [react](http://facebook.github.io/react/) -- extremely impressive^^^, high performant library. react is a new way of thinking about the DOM, and is a viable jQuery replacement.
+- [flux](http://facebook.github.io/flux/) -- flux is a simple architecture pattern, not a framework. I have worked on many large single page applications with several of the largest libraries. They are great, but can be overly complex^^^ and bloated^^^. There is something to be said for simplicity^^^, and this uses that model.
 - [jest](http://facebook.github.io/jest/): great^^^ addition to an already great^^^ test framework ([jasmine](http://jasmine.github.io/))
 
-*^^^ Opinionated -- decide for yourself.*
+*^^^ Opinionated -- decide for yourself. But I'd recommend listening to [this](http://javascriptjabber.com/073-jsj-react-with-pete-hunt-and-jordan-walke/), and giving it a shot before dismissing the idea.*
 
-###install
-
-```sh
-npm install -g isomorphic
-```
-
-###executable
+###executable (IDEAS)
 
 ```sh
 isomorphic new {app-name}
@@ -78,7 +76,7 @@ isomorphic version
   aliases: v, -v, --version
 ```
 
-###### gulp based build
+###gulp based build
 
 ```sh
 gulp
@@ -87,16 +85,15 @@ gulp server
 gulp build {--options}
   # Builds your app and places it into the output path (dist/ by default).
   --environment (Default: development)
-
 ```
 
-###wrapper
+###wrapper (client/server)
 
 ```javascript
 var isomorphic = require('isomorphic');
 isomorphic.React;
-isomorphic.Router; // Director
-isomorphic.Request; // SuperAgent
+isomorphic.Router;
+isomorphic.Request;
 isomorphic.Dispatcher;
 ```
 
@@ -113,11 +110,14 @@ isomorphic.Dispatcher;
   app/routes/*      # client + server routing
   app/stores/*      # flux architecture
   assets/*          # css, images, fonts
-  vendor/*          # bower generated
-  bower.json        # manage vendor assets
   environment.json  # environment / API settings
+  gulp/*            # gulp tasks
   gulpfile.js       # manage build
   package.json      # manage npm
   .gitignore
   .jshintrc
 ```
+
+### example application
+
+running `isomorphic new your-app` will install a small example application. this is (1) isomorphic + displays whether the page was rendered by the client or the server; (2) points to an external API hosted on [DigitalOcean](https://www.digitalocean.com/); (3) uses multiple routes + components.
