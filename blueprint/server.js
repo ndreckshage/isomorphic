@@ -10,10 +10,18 @@ app.set('view engine', 'jade');
 var router = new isomorphic.Router(require('./app/router'));
 app.use(router.middleware());
 
-var api = require('./lib/api');
-var apiPort = process.env.API_PORT || 3031;
-app.use('/api', api.middleware(apiPort));
-api.listen(apiPort);
+var httpProxy = require('http-proxy');
+var proxy = httpProxy.createProxyServer();
+
+function api () {
+  return function (req, res, next) {
+    proxy.web(req, res, {
+      target: 'http://isomorphic-api.frontendperformance.com:3000'
+    });
+  };
+};
+
+app.use('/api', api());
 
 var port = process.env.PORT || 3030;
 app.listen(port);
