@@ -1,9 +1,9 @@
-var apiClient = require('./../../__api_client');
+var request = require('isomorphic').Request;
 
 module.exports = function (callback) {
   console.log('posts');
 
-  apiClient.get('/posts.json', function (err, res) {
+  request.get('/posts.json', function (err, res) {
     if (err) {
       return callback(err);
     }
