@@ -1,4 +1,5 @@
-var browserify = require('browserify'),
+var isomorphic = require('isomorphic'),
+		browserify = require('browserify'),
 		watchify = require('watchify'),
 		bundleLogger = require('../util/bundleLogger'),
 		handleErrors = require('../util/handleErrors'),
@@ -6,9 +7,8 @@ var browserify = require('browserify'),
 		gulp = require('gulp'),
 		fs = require('fs');
 
-var recursiveWalk = require('./../../app/__isomorphic_util_walk');
-var routes = recursiveWalk('./app/routes');
-var components = recursiveWalk('./app/components');
+var routes = isomorphic.Utils.walk('./app/routes');
+var components = isomorphic.Utils.walk('./app/components');
 
 var exposedRoutes = [];
 routes.forEach(function (route) {
@@ -40,7 +40,6 @@ gulp.task('browserify', function() {
 			.bundle()
 			.on('error', handleErrors)
 			.pipe(source('scripts.js'))
-			// .pipe(insert.prepend('var exposedRoutes="test";'))
 			.pipe(gulp.dest('./public/'))
 			.on('end', bundleLogger.end);
 	};

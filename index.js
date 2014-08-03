@@ -2,7 +2,7 @@ module.exports = {
   // Wrappers
   Router: require('./lib/router'),
   Request: require('./lib/request'),
-  // Utils: require('./lib/utils')
+  Utils: require('./lib/utils'),
 
   // Libraries
   React: require('react'),
