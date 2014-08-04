@@ -7,6 +7,6 @@ module.exports = {
   // Libraries
   React: require('react'),
   Director: require('director'),
-  SuperAgent: require('superagent')
-  // Dispatcher: require('./lib/dispatcher')
+  SuperAgent: require('superagent'),
+  Dispatcher: require('./lib/dispatcher')
 };
