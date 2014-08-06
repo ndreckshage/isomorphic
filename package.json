@@ -36,8 +36,8 @@
     "minimist": "^0.2.0",
     "shelljs": "^0.3.0",
     "ncp": "^0.6.0",
-
     "react": "~0.11.1",
+    "flux": "git://github.com/facebook/flux.git#master",
     "director": "~1.2.3",
     "superagent": "~0.18.2"
   }

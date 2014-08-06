@@ -4,7 +4,8 @@ var gulp = require('gulp'),
     handleErrors = require('../util/handleErrors');
 
 gulp.task('stylus', function () {
-  gulp.src(['./assets/stylesheets/vendor/bootstrap.min.css', './assets/stylesheets/index.styl'])
+  // @TODO automatic
+  gulp.src(['./todomvc-common/base.css', './assets/stylesheets/index.styl'])
     .pipe(concat('styles.css'))
     .pipe(gulp.dest('./public'))
     .on('error', handleErrors);

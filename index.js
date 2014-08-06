@@ -1,12 +1,17 @@
+var utils = require('./lib/utils');
+
 module.exports = {
   // Wrappers
   Router: require('./lib/router'),
   Request: require('./lib/request'),
-  Utils: require('./lib/utils'),
+
+  // Utils
+  Utils: utils,
+  require: utils.require,
 
   // Libraries
   React: require('react'),
   Director: require('director'),
   SuperAgent: require('superagent'),
-  Dispatcher: require('./lib/dispatcher')
+  Dispatcher: require('flux').Dispatcher
 };

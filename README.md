@@ -63,14 +63,16 @@ React, Flux and Jest are all Facebook tools. There are plenty of other great too
 ###Executable (#@TODO -- work in progress)
 
 ```sh
-isomorphic new {app-name}
+isomorphic new <app-name> <options...>
   # Creates a new folder and runs isomorphic init in it.
-isomorphic init {app-name}
+  --todo-mvc (Default: false)
+  --bower (Default: false)
+isomorphic init <app-name>
   # Creates a new isomorphic project in the current folder.
   aliases: i
-isomorphic generate {type} {name}
+isomorphic generate <type> <name>
   # Generate new constants, actions, routes, components, stores, dispatchers
-isomorphic help {name}
+isomorphic help <name>
   # Outputs the usage instructions for all commands or the provided command
   aliases: h, -h, --help
 isomorphic test
@@ -100,6 +102,7 @@ isomorphic.React;
 isomorphic.Router;
 isomorphic.Request;
 isomorphic.Dispatcher;
+isomorphic.require
 ```
 
 ###Folder Structure

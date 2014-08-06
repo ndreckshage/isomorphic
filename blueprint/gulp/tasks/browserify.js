@@ -7,14 +7,6 @@ var isomorphic = require('isomorphic'),
 		gulp = require('gulp'),
 		fs = require('fs');
 
-var routes = isomorphic.Utils.walk('./app/routes');
-var components = isomorphic.Utils.walk('./app/components');
-
-var exposedRoutes = [];
-routes.forEach(function (route) {
-	exposedRoutes.push(route.expose);
-});
-
 gulp.task('browserify', function() {
 	var bundleMethod = global.isWatching ? watchify : browserify;
 	var bundler = bundleMethod({
@@ -22,15 +14,9 @@ gulp.task('browserify', function() {
 		debug: true
 	});
 
-	routes.forEach(function (route) {
-		bundler.require(route.path, {
-			expose: route.expose
-		});
-	});
-
-	components.forEach(function (component) {
-		bundler.require(component.path, {
-			expose: component.expose
+	isomorphic.Utils.walk('./app').forEach(function (file) {
+		bundler.require(file.path, {
+			expose: file.expose
 		});
 	});
 
