@@ -41,7 +41,6 @@ function getTodoState() {
 var TodoApp = React.createClass({
 
   getInitialState: function() {
-    console.log(getTodoState())
     return getTodoState();
   },
 

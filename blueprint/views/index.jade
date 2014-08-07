@@ -4,5 +4,12 @@ html
     title isomorphic
     link(href='/styles.css', rel='stylesheet', type='text/css')
   body
-    #isomorphic.container!= body
+    #isomorphic!= body
     script(src='/scripts.js')
+    script.
+      (function (isomorphic, router) {
+        // @TODO remove. gross.
+        var raw = isomorphic.require('components/' + !{componentPath});
+        var component = raw(!{data});
+        router.handleClientRoute(component);
+      })(window.isomorphic, window.router);
