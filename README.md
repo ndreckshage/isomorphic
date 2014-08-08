@@ -36,6 +36,13 @@ Many developers turn away from Node, because full stack (meaning API, and data) 
 
 React and Flux are the most important parts of this project. I'd recommend listening to [this podcast](http://javascriptjabber.com/073-jsj-react-with-pete-hunt-and-jordan-walke/); experimenting with React on their [website](http://facebook.github.io/react/); and reading the concepts behind [Flux architecture](http://facebook.github.io/react/docs/flux-overview.html); installing `npm install -g isomorphic && isomorphic new my-app` to explore the example application. There's a lot of great frameworks out there. React and Flux have a lot of pros. Play around with it and see if it is best for you.
 
+######Example with Flux:
+
+> Views ---> (Route / UI Triggers action) ----> Dispatcher ---> (registered callback) ---> Stores -------+
+> Ʌ                                                                                                     |
+> |                                                                                                    V
+> +-- (Controller-Views "change" event handlers) ---- (Stores emit "change" events) ------------------+
+
 - [Director](https://github.com/flatiron/director)
 - [SuperAgent](https://github.com/visionmedia/superagent)
 
@@ -65,7 +72,8 @@ React, Flux and Jest are all Facebook tools. There are plenty of other great too
 ```sh
 isomorphic new <app-name> <options...>
   # Creates a new folder and runs isomorphic init in it.
-  --todo-mvc (Default: false)
+  --example-todo (Default: false)
+  --example-crud (Default: false)
   --bower (Default: false)
 isomorphic init <app-name>
   # Creates a new isomorphic project in the current folder.
@@ -121,8 +129,10 @@ isomorphic.require
   environment.json  # Environment / API settings
   gulp/*            # Gulp tasks
   gulpfile.js       # Initializes Gulp tasks
-  package.json      # Manage NPM
+  vendor/*          # Vendor Assets (Bower Managed, optional)
   server.js         # Initializes server application
+  package.json      # Manage NPM
+  bower.json        # Manage Bower (optional)
   .gitignore
   .jshintrc
 ```

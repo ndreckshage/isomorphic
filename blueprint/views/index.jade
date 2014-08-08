@@ -10,6 +10,7 @@ html
       (function (isomorphic, router) {
         // @TODO remove. gross.
         var raw = isomorphic.require('components/' + !{componentPath});
+        console.log('jade', !{data});
         var component = raw(!{data});
         router.handleClientRoute(component);
       })(window.isomorphic, window.router);

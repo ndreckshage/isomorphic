@@ -22,6 +22,12 @@ var AppDispatcher = isomorphic.require('dispatcher/app-dispatcher');
 var TodoConstants = isomorphic.require('constants/todo-constants');
 
 var TodoActions = {
+  fetchedIndex: function (data) {
+    AppDispatcher.handleServerAction({
+      actionType: TodoConstants.TODO_FETCHED_INDEX,
+      todos: data.todos
+    });
+  },
 
   /**
    * @param  {string} text

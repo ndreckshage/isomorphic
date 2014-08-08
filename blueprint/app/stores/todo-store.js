@@ -15,6 +15,9 @@
  *
  * TodoStore
  */
+
+ // @TODO -- this is missing first event because the dispatcher should be required on page load
+
 var isomorphic = require('isomorphic');
 
 var AppDispatcher = isomorphic.require('dispatcher/app-dispatcher');
@@ -134,6 +137,10 @@ AppDispatcher.register(function(payload) {
   var text;
 
   switch(action.actionType) {
+    case TodoConstants.TODO_FETCHED_INDEX:
+      _todos = action.todos;
+      break;
+
     case TodoConstants.TODO_CREATE:
       text = action.text.trim();
       if (text !== '') {

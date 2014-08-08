@@ -19,6 +19,7 @@
 var keyMirror = require('react/lib/keyMirror');
 
 module.exports = keyMirror({
+  TODO_FETCHED_INDEX: null,
   TODO_CREATE: null,
   TODO_COMPLETE: null,
   TODO_DESTROY: null,
