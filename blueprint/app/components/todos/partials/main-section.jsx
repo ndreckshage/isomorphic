@@ -20,7 +20,7 @@ var isomorphic = require('isomorphic');
 var React = isomorphic.React;
 
 var TodoActions = isomorphic.require('actions/todo-actions');
-var TodoItem = isomorphic.require('components/todos/todo-item');
+var TodoItem = isomorphic.require('components/todos/partials/todo-item');
 
 var ReactPropTypes = React.PropTypes;
 

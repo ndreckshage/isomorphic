@@ -20,7 +20,7 @@ var isomorphic = require('isomorphic');
 var React = isomorphic.React;
 
 var TodoActions = isomorphic.require('actions/todo-actions');
-var TodoTextInput = isomorphic.require('components/todos/todo-text-input');
+var TodoTextInput = isomorphic.require('components/todos/partials/todo-text-input');
 
 var Header = React.createClass({
 

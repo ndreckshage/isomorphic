@@ -3,24 +3,22 @@
  */
 var isomorphic = require('isomorphic');
 var React = isomorphic.React;
-var Footer = isomorphic.require('components/footer');
-var TodoApp = isomorphic.require('components/todos/todo-app');
-var TodoActions = isomorphic.require('actions/todo-actions');
 
 module.exports = React.createClass({
-  componentDidMount: function () {
-    TodoActions.fetchedIndex(this.props.data);
-  },
-
   render: function () {
-    console.log('indexjsx', this.props)
+    var str ="";
+    this.props.data.todo_lists.forEach(function (todoList) {
+      str+="<a href='/todos/" + todoList + "'>" + todoList + " list</a>";
+    });
+
+    // @TODO dont do it this way...
+
     return (
       <div>
-        <a href="/test">test</a>
-        <section id="todoapp">
-          <TodoApp />
-        </section>
-    		<Footer renderer={this.props.renderer} />
+        <h1>Todo lists</h1>
+        <div dangerouslySetInnerHTML={{__html: str}} />
+        <h2>Create a new list</h2>
+        <a href="/todos/new">New list</a>
       </div>
     );
   }

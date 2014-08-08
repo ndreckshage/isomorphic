@@ -23,9 +23,9 @@
 var isomorphic = require('isomorphic');
 var React = isomorphic.React;
 
-var Footer = isomorphic.require('components/todos/footer');
-var Header = isomorphic.require('components/todos/header');
-var MainSection = isomorphic.require('components/todos/main-section');
+var Footer = isomorphic.require('components/todos/partials/footer');
+var Header = isomorphic.require('components/todos/partials/header');
+var MainSection = isomorphic.require('components/todos/partials/main-section');
 var TodoStore = isomorphic.require('stores/todo-store');
 
 /**
