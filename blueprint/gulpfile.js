@@ -5,4 +5,10 @@
  * Before doing so, consider submitting a pull request (https://github.com/frontendperformance/isomorphic).
  * Note: if you override a task, you may have to adjust your package.json.
  */
+
 require('isomorphic/lib/gulp');
+
+// var gulp = require('gulp');
+// gulp.task('default', ['jshint'], function () {
+//   console.log('You can do this here, or in /gulp/tasks/default.js.');
+// });
