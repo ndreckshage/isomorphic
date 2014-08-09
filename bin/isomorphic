@@ -22,9 +22,7 @@ case validCommands.NEW:
   break;
 case validCommands.SERVER:
 case validCommands.GULP:
-  cp.spawn('gulp', [], {
-    stdio:'inherit'
-  });
+  cp.spawn('gulp', [], { stdio:'inherit' });
   break;
 default:
   console.log('Please enter a valid argument.')

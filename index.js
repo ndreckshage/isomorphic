@@ -1,13 +1,8 @@
-var utils = require('./lib/utils');
-
 module.exports = {
   // Wrappers
   Router: require('./lib/router'),
   Request: require('./lib/request'),
-
-  // Utils
-  Utils: utils,
-  require: utils.require,
+  require: require('./lib/require'),
 
   // Libraries
   React: require('react'),
