@@ -12,6 +12,6 @@ module.exports = {
   // Libraries
   React: require('react'),
   Director: require('director'),
-  SuperAgent: require('superagent'),
-  Dispatcher: require('flux').Dispatcher
+  SuperAgent: require('superagent')
+  // Dispatcher: require('flux').Dispatcher
 };

@@ -78,6 +78,9 @@ isomorphic new <app-name> <options...>
 isomorphic init <app-name>
   # Creates a new isomorphic project in the current folder.
   aliases: i
+isomorphic server
+  aliases: serve, s
+isomorphic gulp <task>
 isomorphic generate <type> <name>
   # Generate new constants, actions, routes, components, stores, dispatchers
 isomorphic help <name>
