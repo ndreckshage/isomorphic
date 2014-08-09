@@ -80,7 +80,9 @@ isomorphic init <app-name>
   aliases: i
 isomorphic server
   aliases: serve, s
+  # Easy access point to 'isomorphic gulp server'
 isomorphic gulp <task>
+  # See below for full list of tasks
 isomorphic generate <type> <name>
   # Generate new constants, actions, routes, components, stores, dispatchers
 isomorphic help <name>
@@ -92,15 +94,6 @@ isomorphic test
 isomorphic version
   # outputs isomorphic version
   aliases: v, -v, --version
-```
-
-###Build (#@TODO environments)
-
-```sh
-gulp
-  # Default command. Builds and serves your app, rebuilding on file changes.
-gulp {command}
-  # See /gulp folder to view tasks / add new ones.
 ```
 
 ###Wrapper (client/server)
