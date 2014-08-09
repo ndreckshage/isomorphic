@@ -7,10 +7,10 @@ html
     #isomorphic!= body
     script(src='/scripts.js')
     script.
-      (function (isomorphic, router) {
-        // @TODO remove. gross.
-        var raw = isomorphic.require('components/' + !{componentPath});
-        console.log('jade', !{data});
-        var component = raw(!{data});
-        router.handleClientRoute(component);
-      })(window.isomorphic, window.router);
+      try {
+        window.isomorphize(!{componentPath}, !{data});
+      } catch (e) {
+        try {
+          window.console.error('cannot isomorphize!')
+        } catch (e) {}
+      }

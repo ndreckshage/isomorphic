@@ -1,10 +1,10 @@
 module.exports = {
-  // Wrappers
+  require: require('./lib/require'),
+  renderer: require('./lib/renderer'),
+
   Router: require('./lib/router'),
   Request: require('./lib/request'),
-  require: require('./lib/require'),
 
-  // Libraries
   React: require('react'),
   Director: require('director'),
   SuperAgent: require('superagent')

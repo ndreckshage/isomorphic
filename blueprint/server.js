@@ -7,7 +7,7 @@ app.use(express.static(__dirname + '/public'));
 app.set('views', __dirname + '/views');
 app.set('view engine', 'jade');
 
-var router = new isomorphic.Router(require('./app/router'));
+var router = new isomorphic.Router(isomorphic.require('router'), isomorphic.renderer);
 app.use(router.middleware());
 // app.use(isormophic.router())
 
