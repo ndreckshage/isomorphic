@@ -21,7 +21,7 @@
  * created circular dependencies.
  */
 
-var Promise = require('es6-promise').Promise;
+var xPromise = require('es6-promise').Promise;
 var merge = require('react/lib/merge');
 
 var _callbacks = [];
@@ -49,7 +49,7 @@ Dispatcher.prototype = merge(Dispatcher.prototype, {
     var resolves = [];
     var rejects = [];
     _promises = _callbacks.map(function(_, i) {
-      return new Promise(function(resolve, reject) {
+      return new xPromise(function(resolve, reject) {
         resolves[i] = resolve;
         rejects[i] = reject;
       });
@@ -58,7 +58,7 @@ Dispatcher.prototype = merge(Dispatcher.prototype, {
     _callbacks.forEach(function(callback, i) {
       // Callback can return an obj, to resolve, or a promise, to chain.
       // See waitFor() for why this might be useful.
-      Promise.resolve(callback(payload)).then(function() {
+      xPromise.resolve(callback(payload)).then(function() {
         resolves[i](payload);
       }, function() {
         rejects[i](new Error('Dispatcher callback unsuccessful'));
@@ -105,7 +105,7 @@ Dispatcher.prototype = merge(Dispatcher.prototype, {
     var selectedPromises = promiseIndexes.map(function(index) {
       return _promises[index];
     });
-    return Promise.all(selectedPromises).then(callback);
+    return xPromise.all(selectedPromises).then(callback);
   }
 
 });
