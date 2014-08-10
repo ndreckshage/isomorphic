@@ -34,9 +34,11 @@ Many developers turn away from Node, because full stack (meaning API, and data) 
 - [React](http://facebook.github.io/react/)
 - [Flux](http://facebook.github.io/flux/)
 
-React and Flux are the most important parts of this project. I'd recommend listening to [this podcast](http://javascriptjabber.com/073-jsj-react-with-pete-hunt-and-jordan-walke/); experimenting with React on their [website](http://facebook.github.io/react/); and reading the concepts behind [Flux architecture](http://facebook.github.io/react/docs/flux-overview.html); installing `npm install -g isomorphic && isomorphic new my-app` to explore the example application. There's a lot of great frameworks out there. React and Flux have a lot of pros. Play around with it and see if it is best for you.
+React and Flux are the most important parts of this project. I'd recommend listening to [this podcast](http://javascriptjabber.com/073-jsj-react-with-pete-hunt-and-jordan-walke/); experimenting with React on their [website](http://facebook.github.io/react/); and reading the concepts behind [Flux architecture](http://facebook.github.io/react/docs/flux-overview.html); installing `npm install -g isomorphic && isomorphic new my-app` to explore the example application.
 
 Flux is very simple: route resolves a promise via services ---> route renders React component ---> component calls ajax complete action ---> action is dispatched ---> store(s) listening to dispatch ---> store updates component ---> user clicks button ---> component calls action ---> action is dispatched ---> store(s) listening to dispatch ---> store updates component ---> user clicks link to navigate to new route...
+
+There's a lot of great frameworks out there. React and Flux have a lot of pros. Play around with it and see if it is best for you.
 
 - [Director](https://github.com/flatiron/director)
 - [SuperAgent](https://github.com/visionmedia/superagent)
@@ -44,9 +46,9 @@ Flux is very simple: route resolves a promise via services ---> route renders Re
 Small isomorphic libraries for routing (Director) and Ajax requests (SuperAgent). Isomorphic wraps these and provides isomorphic.Router and isomorphic.request, which work on client + server. Picked for size, simplicity and isomorphic support.
 
 - [Express](http://expressjs.com/)
-- [Styles](http://learnboost.github.io/stylus/)
+- [Stylus](http://learnboost.github.io/stylus/)
 
-Frontend Node server uses express, with Stylus and [Jade](http://jade-lang.com/) (Jade less important with inclusion of React). This server will likely be simple with the use of an external API.
+Frontend Node server uses express, with Stylus. This server will likely be relatively simple with the use of an external API.
 
 - [Jest](http://facebook.github.io/jest/)
 - [Jasmine](http://jasmine.github.io/)
@@ -124,6 +126,7 @@ isomorphic.Router;
   */__tests__/*     # Tests -- ex: app/routes/__tests__/*
   app/*             # All server + client code
   app/client.js     # Initializes client application
+  app/router.js     # Define application routes
   app/actions/*     # Flux architecture
   app/constants/*   # Link actions with dispatcher, etc
   app/components/*  # React components
@@ -132,13 +135,13 @@ isomorphic.Router;
   app/services/*    # All requests to API endpoint
   app/stores/*      # Flux architecture
   assets/*          # CSS; Images; Fonts
-  environment.json  # Environment / API settings
-  gulp/*            # Gulp tasks
-  gulpfile.js       # Initializes Gulp tasks
-  vendor/*          # Vendor Assets (Bower Managed, optional)
-  server.js         # Initializes server application
-  package.json      # Manage NPM
   bower.json        # Manage Bower (optional)
+  environment.json  # Environment / API settings
+  gulpfile.js       # Overwrite gulp tasks defined in isomorphic
+  index.html        # Entry point
+  package.json      # Manage NPM
+  server.js         # Initializes server application
+  vendor/*          # Vendor Assets (Bower Managed, optional)
   .gitignore
   .jshintrc
 ```
