@@ -9,9 +9,9 @@ Command-line interface + build tool for creating isomorphic webapps with [React]
 npm install -g isomorphic
 isomorphic new your-app --todo # or --crud for example applications
 ```
-Then go to [localhost:3030](http://localhost:3030)...or see it now at [todo.frontendperformance.com](todo.frontendperformance.com).
+Then go to [localhost:3030](http://localhost:3030)...or see it now at [isomorphic-todo.frontendperformance.com](isomorphic-todo.frontendperformance.com).
 
-[Basic Code Implementation Snippet](https://github.com/frontendperformance/isomorphic/wiki/Basic-Implementation
+[Basic code implementation snippet](https://github.com/frontendperformance/isomorphic/wiki/Basic-Implementation
 )
 
 
@@ -20,7 +20,7 @@ Then go to [localhost:3030](http://localhost:3030)...or see it now at [todo.fron
 - Server rendered websites provide SEO and initial page load performance\*.
 - Client rendered webapps (MVx, etc.) give developers tools to build better user experiences\*, and are faster after the initial page load\*. They struggle with SEO\*\* and initial page load performance\*\*.
 
-[Isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) webapps are single page applications that render on both the client and server (using [nodejs](http://nodejs.org/)). This give developers tools to ambitious client side webapps, **and** provide SEO and initial page load performance by default.
+[Isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) webapps are single page applications that render on both the client and server (using [nodejs](http://nodejs.org/)). This give developers tools to build ambitious client side webapps, **and** provides SEO and initial page load performance by default.
 
 \*_Typically_ and \*\*_without jumping through hoops_
 
@@ -162,8 +162,8 @@ isomorphic.Router;
 
 *WORK IN PROGRESS*
 
-- The example todo application can be seen at [todo.frontendperformance.com](todo.frontendperformance.com).
-- The example crud application can be seen at [crud.frontendperformance.com](crud.frontendperformance.com).
+- The example todo application can be seen at [isomorphic-todo.frontendperformance.com](isomorphic-todo.frontendperformance.com).
+- The example crud application can be seen at [isomorphic-crud.frontendperformance.com](isomorphic-crud.frontendperformance.com).
 
 `isomorphic new your-app --todo` and `isomorphic new your-app --crud` will install the example application.
 
@@ -171,6 +171,6 @@ This application is:
 
 1. Isomorphic -- try disabling JavaScript.
 2. Highly performant -- look at network times.
-3. Proxies (readonly) APIs at [todo-api.frontendperformance.com](todo-api.frontendperformance.com) and [crud-api.frontendperformance.com](crud-api.frontendperformance.com).
+3. Proxies (readonly) APIs at [isomorphic-todo-api.frontendperformance.com](isomorphic-todo-api.frontendperformance.com) and [isomorphic-crud-api.frontendperformance.com](isomorphic-crud-api.frontendperformance.com).
 
 The todo example extends [TodoMVC](http://todomvc.com/architecture-examples/react/) to show a slightly more complex application with routing, and an API.
