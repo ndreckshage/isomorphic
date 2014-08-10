@@ -8,9 +8,10 @@ html
     script(src='/scripts.js')
     script.
       try {
-        window.isomorphize(!{componentPath}, !{data});
+        window.isomorphic.router.start();
+        window.isomorphic.router.isomorphize(!{componentPath}, !{data});
       } catch (e) {
         try {
-          window.console.error('one does not simply call isomorphize, without first loading isomorphize.')
+          window.console.error('one does not simply call isomorphic, without first loading isomorphic.')
         } catch (e) {}
       }
