@@ -2,13 +2,11 @@
 <html>
   <head>
     <title>isomorphic</title>
-    <link href="/styles.css" rel="stylesheet" type="text/css">
+    {{CRITICAL_CSS}}
   </head>
   <body>
     <div id="isomorphic">{{BODY}}</div>
-    <script src="/scripts.js"></script>
-    <script>
-      window.isomorphic.isomorphize({{COMPONENT_PATH}}, {{DATA}});
-    </script>
+    <script>window.isomorphize={componentPath:{{COMPONENT_PATH}},data:{{DATA}},nonCriticalCSS:{{NON_CRITICAL_CSS}}};</script>
+    <script src="/isomorphic.js" async></script>
   </body>
 </html>
