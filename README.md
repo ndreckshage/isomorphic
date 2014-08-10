@@ -46,7 +46,7 @@ React and Flux are the most important parts of this project. I'd recommend liste
 - [Director](https://github.com/flatiron/director)
 - [SuperAgent](https://github.com/visionmedia/superagent)
 
-Small isomorphic libraries for routing (Director) and Ajax requests (SuperAgent). Isomorphic wraps these and provides isomorphic.Router and isomorphic.Request, which work on client + server. Picked for size, simplicity and isomorphic support.
+Small isomorphic libraries for routing (Director) and Ajax requests (SuperAgent). Isomorphic wraps these and provides isomorphic.Router and isomorphic.request, which work on client + server. Picked for size, simplicity and isomorphic support.
 
 - [Express](http://expressjs.com/)
 - [Styles](http://learnboost.github.io/stylus/)
@@ -104,7 +104,7 @@ isomorphic version
 var isomorphic = require('isomorphic');
 isomorphic.React;
 isomorphic.Router;
-isomorphic.Request;
+isomorphic.request;
 isomorphic.Dispatcher;
 isomorphic.require
 ```

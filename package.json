@@ -34,11 +34,12 @@
   },
   "dependencies": {
     "director": "~1.2.3",
+    "es6-promise": "~1.0.0",
     "flux": "git://github.com/ndreckshage/flux.git#master",
-    "minimist": "^0.2.0",
-    "ncp": "^0.6.0",
+    "minimist": "~0.2.0",
+    "ncp": "~0.6.0",
     "react": "~0.11.1",
-    "shelljs": "^0.3.0",
+    "shelljs": "~0.3.0",
     "superagent": "~0.18.2"
   },
   "devDependencies": {

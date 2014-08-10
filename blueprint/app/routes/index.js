@@ -1,9 +1,7 @@
 var isomorphic = require('isomorphic');
-var request = isomorphic.Request;
+var TodoListService = isomorphic.require('services/todo-list-service');
 
-module.exports = function (callback) {
-  request.get('/posts.json', function (err, res) {
-    res.body = {data: { todo_lists: ['groceries', 'work', 'something'] }};
-    callback(null, 'index', { data: res.body.data });
-  });
+module.exports.render = 'index';
+module.exports.promise = function () {
+  return TodoListService.fetchIndex();
 };
