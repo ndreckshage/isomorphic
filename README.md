@@ -11,6 +11,10 @@ isomorphic new your-app --todo # or --crud for example applications
 ```
 Then [localhost:3030](localhost:3030)...or see it now at [todo.frontendperformance.com](todo.frontendperformance.com).
 
+[Basic Code Implementation Snippet](https://github.com/frontendperformance/isomorphic/wiki/Basic-Implementation
+)
+
+
 ###What?
 
 - Server rendered websites provide SEO and initial page load performance\*.
@@ -18,7 +22,7 @@ Then [localhost:3030](localhost:3030)...or see it now at [todo.frontendperforman
 
 [Isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) webapps are single page applications that render on both the client and server (using [nodejs](http://nodejs.org/)). This give developers tools to ambitious client side webapps, **and** provide SEO and initial page load performance by default.
 
-\**Typically*; \*\**Without jumping through hoops*
+\*_Typically_ and \*\*_without jumping through hoops_
 
 ###Goals
 
@@ -104,9 +108,6 @@ isomorphic version
 ###Wrapper (client/server)
 
 *Include these in application JavaScript code to be used on the client and server.*
-
-[Basic Implementation](https://github.com/frontendperformance/isomorphic/wiki/Basic-Implementation
-)
 
 ```javascript
 var isomorphic = require('isomorphic');
