@@ -102,11 +102,25 @@ isomorphic version
 
 ```javascript
 var isomorphic = require('isomorphic');
+
+// react and flux dispatcher
 isomorphic.React;
-isomorphic.Router;
-isomorphic.request;
 isomorphic.Dispatcher;
-isomorphic.require
+
+// client takes over server.
+isomorphic.isomorphize;
+
+// wraps require to prefix filenames with what client/server expecting.
+isomorphic.require;
+
+// interact with api endpoint on client / server (uses Superagent)
+isomorphic.request;
+
+// promises to use with superagent in services.
+isomorphic.Promise;
+
+// initializes routes on client / server (uses Director)
+isomorphic.Router;
 ```
 
 ###Folder Structure

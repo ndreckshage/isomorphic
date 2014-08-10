@@ -5,7 +5,7 @@ module.exports.Dispatcher = require('flux').Dispatcher;
 // client takes over server.
 module.exports.isomorphize = require('./lib/isomorphize');
 
-// wraps require to serve what client / server needs
+// wraps require to prefix filenames with what client/server expecting.
 module.exports.require = require('./lib/require');
 
 // interact with api endpoint on client / server (uses Superagent)
