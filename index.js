@@ -2,8 +2,8 @@
 module.exports.React = require('react');
 module.exports.Dispatcher = require('flux').Dispatcher;
 
-// keeps track of whether rendered on client / server
-module.exports.renderer = require('./lib/renderer');
+// client takes over server.
+module.exports.isomorphize = require('./lib/isomorphize');
 
 // wraps require to serve what client / server needs
 module.exports.require = require('./lib/require');

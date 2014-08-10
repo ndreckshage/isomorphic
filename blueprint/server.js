@@ -4,10 +4,8 @@ var app = express();
 
 require('node-jsx').install({extension: '.jsx'});
 app.use(express.static(__dirname + '/public'));
-app.set('views', __dirname + '/views');
-app.set('view engine', 'jade');
 
-var router = new isomorphic.Router(isomorphic.require('router'), isomorphic.renderer);
+var router = new isomorphic.Router('server');
 app.use(router.middleware());
 // app.use(isormophic.router())
 

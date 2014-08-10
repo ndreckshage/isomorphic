@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>isomorphic</title>
+    <link href="/styles.css" rel="stylesheet" type="text/css">
+  </head>
+  <body>
+    <div id="isomorphic">{{BODY}}</div>
+    <script src="/scripts.js"></script>
+    <script>
+      window.isomorphic.isomorphize({{COMPONENT_PATH}}, {{DATA}});
+    </script>
+  </body>
+</html>
