@@ -36,12 +36,7 @@ Many developers turn away from Node, because full stack (meaning API, and data) 
 
 React and Flux are the most important parts of this project. I'd recommend listening to [this podcast](http://javascriptjabber.com/073-jsj-react-with-pete-hunt-and-jordan-walke/); experimenting with React on their [website](http://facebook.github.io/react/); and reading the concepts behind [Flux architecture](http://facebook.github.io/react/docs/flux-overview.html); installing `npm install -g isomorphic && isomorphic new my-app` to explore the example application. There's a lot of great frameworks out there. React and Flux have a lot of pros. Play around with it and see if it is best for you.
 
-######Example with Flux:
-
-> Views ---> (Route / UI Triggers action) ----> Dispatcher ---> (registered callback) ---> Stores -------+
-> Ʌ                                                                                                     |
-> |                                                                                                    V
-> +-- (Controller-Views "change" event handlers) ---- (Stores emit "change" events) ------------------+
+Flux is very simple: route resolves a promise via services ---> route renders React component ---> component calls ajax complete action ---> action is dispatched ---> store(s) listening to dispatch ---> store updates component ---> user clicks button ---> component calls action ---> action is dispatched ---> store(s) listening to dispatch ---> store updates component ---> user clicks link to navigate to new route...
 
 - [Director](https://github.com/flatiron/director)
 - [SuperAgent](https://github.com/visionmedia/superagent)
@@ -134,6 +129,7 @@ isomorphic.Router;
   app/components/*  # React components
   app/dispatcher/*  # Flux architecture
   app/routes/*      # Client + server routing
+  app/services/*    # All requests to API endpoint
   app/stores/*      # Flux architecture
   assets/*          # CSS; Images; Fonts
   environment.json  # Environment / API settings
