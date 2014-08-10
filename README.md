@@ -9,7 +9,7 @@ Command-line interface + build tool for creating isomorphic webapps with [React]
 npm install -g isomorphic
 isomorphic new your-app --todo # or --crud for example applications
 ```
-Then [localhost:3030](localhost:3030)...or see it now at [todo.frontendperformance.com](todo.frontendperformance.com).
+Then go to [localhost:3030](http://localhost:3030)...or see it now at [todo.frontendperformance.com](todo.frontendperformance.com).
 
 [Basic Code Implementation Snippet](https://github.com/frontendperformance/isomorphic/wiki/Basic-Implementation
 )
