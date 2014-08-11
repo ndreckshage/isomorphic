@@ -12,7 +12,7 @@ app.use(isomorphic.router.middleware());
 isomorphic.proxy = function () {
   var request = require('request');
   return function (req, res) {
-    req.pipe(request('http://isomorphic-api.frontendperformance.com' + req.url)).pipe(res)
+    req.pipe(request('http://isomorphic-todo-api.frontendperformance.com' + req.url)).pipe(res)
   }
 }
 
