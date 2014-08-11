@@ -1,6 +1,6 @@
 {
   "name": "isomorphic",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "description": "command line utility for isomorphic webapps",
   "bin": {
     "isomorphic": "./bin/isomorphic"

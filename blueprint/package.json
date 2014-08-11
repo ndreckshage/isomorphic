@@ -1,6 +1,6 @@
 {
   "name": "APP",
-  "version": "0.0.3",
+  "version": "0.0.4",
   "scripts": {
     "test": "jest"
   },
@@ -12,6 +12,7 @@
     "request": "~2.39.0"
   },
   "devDependencies": {
-    "gulp": "~3.8.6"
+    "gulp": "~3.8.6",
+    "chalk": "~0.5.1"
   }
 }
