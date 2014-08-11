@@ -2,25 +2,24 @@
 
 ###_Work in Progress. Not Complete._
 
-Command-line interface + build tool for creating isomorphic webapps with [React](http://facebook.github.io/react/) + [Flux](http://facebook.github.io/flux/).
+Command-line interface and project structure for building isomorphic webapps with [React](http://facebook.github.io/react/) + [Flux](http://facebook.github.io/flux/).
 
 ######Install
 ```sh
 npm install -g isomorphic
-isomorphic new your-app --todo # or --crud for example applications
+isomorphic new your-app
 ```
-Then go to [localhost:3030](http://localhost:3030)...or see it now at [isomorphic-todo.frontendperformance.com](isomorphic-todo.frontendperformance.com).
+Then go to [localhost:3030](http://localhost:3030)...or see it now at [isomorphic-todo.frontendperformance.com](http://isomorphic-todo.frontendperformance.com).
 
 [Basic code implementation snippet](https://github.com/frontendperformance/isomorphic/wiki/Basic-Implementation
 )
 
-
 ###What?
 
 - Server rendered websites provide SEO and initial page load performance\*.
-- Client rendered webapps (MVx, etc.) give developers tools to build better user experiences\*, and are faster after the initial page load\*. They struggle with SEO\*\* and initial page load performance\*\*.
+- Client rendered webapps (MVx, etc.) offer a better user experience\*, and are faster after the initial page load\*. They struggle with SEO\*\* and initial page load performance\*\*.
 
-[Isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) webapps are single page applications that render on both the client and server (using [nodejs](http://nodejs.org/)). This give developers tools to build ambitious client side webapps, **and** provides SEO and initial page load performance by default.
+[Isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) webapps are single page applications that render on both the client and server (using [nodejs](http://nodejs.org/)). They are ambitious client side webapps, and SEO and initial page load performance by **default**.
 
 \*_Typically_ and \*\*_without jumping through hoops_
 
@@ -28,10 +27,10 @@ Then go to [localhost:3030](http://localhost:3030)...or see it now at [isomorphi
 
 > "MY SERVER WILL NEVER BE IN NODE AND I WILL NEVER USE MONGO." -- [PHP CEO](https://twitter.com/PHP_CEO)
 
-Many developers turn away from Node, because full stack (API; data) JavaScript might not be feasible, or desirable. This CLI and project structure separates the frontend server from the data layer. Both the client, and frontend Node.js server interact with a language agnostic API endpoint (with use of a proxy).
+Many developers turn away from Node, because full stack JavaScript (API; data) might not be feasible, or desirable. This separates the frontend Node.js server from the data layer. Both the client, and frontend server interact with a language agnostic API endpoint.
 
-- Provide the most 'JavaScript bang' for the 'performance buck'.
-- Give developers tools to easily create high quality, highly performant isomorphic webapps.
+- Provide the most 'JavaScript bang' for your 'performance buck'.
+- Simplicity. Make it easy to create high quality, highly performant isomorphic webapps.
 - Follow [performance best practices](https://developers.google.com/speed/docs/best-practices/rules_intro): Server rendered HTML; no blocking assets; critical css.
 - Piece together simple, great tools, to provide an easy to use CLI and framework, without reinventing the wheel.
 - Smart build tools: simple CLI (scaffolding + generators); Unit testing; [Gulp](http://gulpjs.com/) tasks.
@@ -47,9 +46,9 @@ Many developers turn away from Node, because full stack (API; data) JavaScript m
 
 React and Flux are the most important parts of this project. I'd recommend listening to [this podcast](http://javascriptjabber.com/073-jsj-react-with-pete-hunt-and-jordan-walke/); [experimenting with React](http://facebook.github.io/react/); and reading the concepts behind [Flux architecture](http://facebook.github.io/react/docs/flux-overview.html).
 
-Flux is very simple: route resolves a promise via services ---> route renders React component ---> component calls ajax complete action ---> action is dispatched ---> store(s) listening to dispatch ---> store updates component ---> user clicks button ---> component calls action ---> action is dispatched ---> store(s) listening to dispatch ---> store updates component ---> user clicks link to navigate to new route...
+Flux is very simple: [route](https://github.com/frontendperformance/isomorphic/blob/master/blueprint/app/routes/index.js#L6) resolves a promise via [services](https://github.com/frontendperformance/isomorphic/blob/master/blueprint/app/services/todo-list-service.js#L2) ---> [route](https://github.com/frontendperformance/isomorphic/blob/master/blueprint/app/routes/index.js#L5) renders [React component](https://github.com/frontendperformance/isomorphic/blob/master/blueprint/app/components/index.jsx#L57) ---> component calls [action setting initial data](https://github.com/frontendperformance/isomorphic/blob/master/blueprint/app/components/index.jsx#L36) ---> [action is dispatched](https://github.com/frontendperformance/isomorphic/blob/master/blueprint/app/actions/todo-list-actions.js#L23) ---> [store(s) listening to dispatch](https://github.com/frontendperformance/isomorphic/blob/master/blueprint/app/stores/todo-list-store.js#L43) ---> [store updates component](https://github.com/frontendperformance/isomorphic/blob/master/blueprint/app/stores/todo-list-store.js#L22) ---> [user clicks link](https://github.com/frontendperformance/isomorphic/blob/master/blueprint/app/components/index.jsx#L64) ---> route resolves promise...
 
-There's a lot of great frameworks out there. React and Flux have a lot of pros. Play around with it and see if it is best for you. Run `npm install -g isomorphic && isomorphic new my-app --example-todo` to explore the example application.
+There are a lot of great frameworks out there. React and Flux have a lot of pros. Play around with them and see if they are best for you. Run `npm install -g isomorphic && isomorphic new my-app` to explore the example application.
 
 ######Tools for Single Page Apps
 
@@ -73,18 +72,20 @@ Jest extends Jasmine, adding useful tools to a test suite. Tests files in `*/__t
 - [Stylus](http://learnboost.github.io/stylus/)
 - [Gulp](http://gulpjs.com/)
 
-Frontend Node server uses express, with Stylus. This server will likely be relatively simple with the use of an external API.
+Frontend Node server uses express, with Stylus. This server will likely be relatively simple with the use of an external API. **Support for [Critical CSS](https://developers.google.com/speed/pagespeed/service/PrioritizeCriticalCss)** by defining a critical CSS entry point in a route.
 
-Gulp is a stream-based build tool, which is simpler, and more efficient than Grunt.
+Gulp is a stream-based build tool, which is simpler, and more efficient than Grunt. Gulp tasks are defined in outside of the project scaffold, but can be overwritten on a per app basis.
 
 ######Facebook...
 > "WHY SO MANY FACEBOOK TOOLS????" -- [Creator of Yet Another Framework](http://blog.tastejs.com/yet-another-framework-syndrome-yafs)
 
-React, Flux and Jest are all Facebook creations. There are plenty of other great tools out there. I've tried many to varying extents, and appreciate the simplicity + power of the Facebook stack. I think React is innovative, and a fun technology to use. There is also a huge benefit in knowing these tools are battle tested on one of the worlds most trafficked sites. These libraries are powerful, easy to use, and committed to performance.
+React, Flux and Jest are all Facebook creations. There are plenty of other great tools out there. I've tried many to varying extents, and appreciate the simplicity + power of the Facebook stack. I think React is innovative, and a fun technology to use. There is also a huge benefit in knowing these tools are battle tested on one of the worlds most trafficked sites. These libraries are powerful, and committed to performance.
 
 ###Executable
 
-*NOTE: WORK IN PROGRESS*
+*NOTE: WORK IN PROGRESS.*
+
+ONLY `isomorphic new <app-name>` (which installs [todo example](http://isomorphic-todo.frontendperformance.com/)) and `isomorphic server` today.
 
 ```sh
 isomorphic new <app-name> <options...>
@@ -129,7 +130,10 @@ isomorphic.request;
 isomorphic.Promise;
 
 // initializes routes on client / server (uses Director)
-isomorphic.Router;
+isomorphic.router;
+
+// basic performance stats
+isomorphic.performance;
 ```
 
 ###Folder Structure
@@ -162,15 +166,15 @@ isomorphic.Router;
 
 *WORK IN PROGRESS*
 
-- The example todo application can be seen at [isomorphic-todo.frontendperformance.com](isomorphic-todo.frontendperformance.com).
-- The example crud application can be seen at [isomorphic-crud.frontendperformance.com](isomorphic-crud.frontendperformance.com).
+- The example todo application can be seen at [isomorphic-todo.frontendperformance.com](http://isomorphic-todo.frontendperformance.com).
+- The example crud application can be seen at [isomorphic-crud.frontendperformance.com](http://isomorphic-crud.frontendperformance.com).
 
 `isomorphic new your-app --todo` and `isomorphic new your-app --crud` will install the example application.
 
 This application is:
 
 1. Isomorphic -- try disabling JavaScript.
-2. Highly performant -- look at network times.
-3. Proxies (readonly) APIs at [isomorphic-todo-api.frontendperformance.com](isomorphic-todo-api.frontendperformance.com) and [isomorphic-crud-api.frontendperformance.com](isomorphic-crud-api.frontendperformance.com).
+2. Highly performant -- look at network times. I've seen times under 100ms total (60ms server, 40ms client).
+3. Proxies (readonly) APIs at [isomorphic-todo-api.frontendperformance.com](http://isomorphic-todo-api.frontendperformance.com) and [isomorphic-crud-api.frontendperformance.com](http://isomorphic-crud-api.frontendperformance.com).
 
 The todo example extends [TodoMVC](http://todomvc.com/architecture-examples/react/) to show a slightly more complex application with routing, and an API.
