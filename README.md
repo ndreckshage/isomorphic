@@ -19,7 +19,7 @@ Then go to [localhost:3030](http://localhost:3030)...or see it now at [isomorphi
 - Server rendered websites provide SEO and initial page load performance\*.
 - Client rendered webapps (MVx, etc.) offer a better user experience\*, and are faster after the initial page load\*. They struggle with SEO\*\* and initial page load performance\*\*.
 
-[Isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) webapps are single page applications that render on both the client and server (using [nodejs](http://nodejs.org/)). They are ambitious client side webapps, and SEO and initial page load performance by **default**.
+[Isomorphic](http://nerds.airbnb.com/isomorphic-javascript-future-web-apps/) webapps are single page applications that render on both the client and server (using [nodejs](http://nodejs.org/)). They are ambitious client side webapps with SEO and initial page load performance by **default**.
 
 \*_Typically_ and \*\*_without jumping through hoops_
 
