@@ -5,7 +5,6 @@ module.exports.fetchIndex = function () {
       if (err) {
         reject(err);
       } else {
-        console.log(res)
         resolve(res.body.data);
       }
     });

@@ -1,7 +1,8 @@
 #!/usr/bin/env node
 
 var args = require('minimist')(process.argv.slice(2));
-var cwd = require('shelljs').pwd();
+var shell = require('shelljs');
+var cwd = shell.pwd();
 var ncp = require('ncp').ncp;
 var path = require('path');
 var fs = require('fs');
@@ -75,10 +76,26 @@ function emptyDirectory (path, fn) {
 function installApplicationAt (destination) {
   var blueprint = path.resolve(path.join(__dirname, '..', 'blueprint'));
   ncp(blueprint, destination, function (err) {
-   if (err) {
-     return console.error(err);
-   } else {
-     console.log('worked');
-   }
+    if (err) {
+      return console.error(err);
+    } else {
+      console.log(chalk.cyan('Application installed at', destination));
+      console.log(chalk.yellow('Changing directory to', destination, 'and Running NPM Install'));
+      shell.cd(destination);
+
+      var npminstall = spawn('npm', ['install']);
+      npminstall.stdout.on('data', function (data) {
+        console.log('stdout: ' + data);
+      });
+
+      npminstall.stderr.on('data', function (data) {
+        console.log(chalk.red(data));
+      });
+
+      npminstall.on('close', function (code) {
+        console.log(chalk.green('Node modules installed, running isomorphic server'));
+        spawn('gulp', ['server'], { stdio:'inherit' });
+      });
+    }
   });
 }
