@@ -5,8 +5,7 @@ var app = express();
 require('node-jsx').install({extension: '.jsx'});
 app.use(express.static(__dirname + '/public'));
 
-var router = new isomorphic.Router('server');
-app.use(router.middleware());
+app.use(isomorphic.router.middleware());
 // app.use(isormophic.router())
 
 // @TODO temp

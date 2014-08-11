@@ -22,19 +22,13 @@ var AppDispatcher = isomorphic.require('dispatcher/app-dispatcher');
 var TodoConstants = isomorphic.require('constants/todo-constants');
 
 var TodoActions = {
-  fetchedIndex: function (data) {
-    AppDispatcher.handleServerAction({
-      actionType: TodoConstants.TODO_FETCHED_INDEX,
-      todos: data.todos
-    });
-  },
-
   /**
    * @param  {string} text
    */
-  create: function(text) {
+  create: function (todoList, text) {
     AppDispatcher.handleViewAction({
       actionType: TodoConstants.TODO_CREATE,
+      todoList: todoList,
       text: text
     });
   },

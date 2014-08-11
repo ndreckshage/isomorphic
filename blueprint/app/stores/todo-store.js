@@ -16,12 +16,11 @@
  * TodoStore
  */
 
- // @TODO -- this is missing first event because the dispatcher should be required on page load
-
 var isomorphic = require('isomorphic');
 
 var AppDispatcher = isomorphic.require('dispatcher/app-dispatcher');
 var TodoConstants = isomorphic.require('constants/todo-constants');
+var TodoListConstants = isomorphic.require('constants/todo-list-constants');
 
 var EventEmitter = require('events').EventEmitter;
 var merge = require('react/lib/merge');
@@ -34,13 +33,14 @@ var _todos = {};
  * Create a TODO item.
  * @param  {string} text The content of the TODO
  */
-function create(text) {
+function create (todoList, text) {
   // Hand waving here -- not showing how this interacts with XHR or persistent
   // server-side storage.
   // Using the current timestamp in place of a real id.
   var id = Date.now();
   _todos[id] = {
     id: id,
+    todo_list_id: todoList.id,
     complete: false,
     text: text
   };
@@ -61,7 +61,6 @@ function update(id, updates) {
  *     the data to be updated.  Used to mark all TODOs as completed.
  * @param  {object} updates An object literal containing only the data to be
  *     updated.
-
  */
 function updateAll(updates) {
   for (var id in _todos) {
@@ -94,21 +93,27 @@ var TodoStore = merge(EventEmitter.prototype, {
    * Tests whether all the remaining TODO items are marked as completed.
    * @return {boolean}
    */
-  areAllComplete: function() {
-    for (var id in _todos) {
-      if (!_todos[id].complete) {
+  areAllComplete: function (id) {
+    this.getAll(id).forEach(function (todo) {
+      if (!todo.complete) {
         return false;
       }
-    }
+    });
     return true;
   },
 
   /**
-   * Get the entire collection of TODOs.
+   * Get the lists collection of TODOs.
    * @return {object}
    */
-  getAll: function() {
-    return _todos;
+  getAll: function (id) {
+    var todos = [];
+    for (var i in _todos) {
+      if (_todos[i].todo_list_id === id) {
+        todos.push(_todos[i]);
+      }
+    }
+    return todos;
   },
 
   emitChange: function() {
@@ -136,14 +141,17 @@ AppDispatcher.register(function(payload) {
   var text;
 
   switch(action.actionType) {
-    case TodoConstants.TODO_FETCHED_INDEX:
-      _todos = action.todos;
+    case TodoListConstants.TODO_LIST_SHOW_FETCHED:
+    case TodoListConstants.TODO_LIST_SHOW_STATE:
+      action.data.todos.forEach(function (todo) {
+        update(todo.id, todo);
+      });
       break;
 
     case TodoConstants.TODO_CREATE:
       text = action.text.trim();
       if (text !== '') {
-        create(text);
+        create(action.todoList, text);
       }
       break;
 

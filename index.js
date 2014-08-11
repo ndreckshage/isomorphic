@@ -15,4 +15,7 @@ module.exports.request = require('./lib/request');
 module.exports.Promise = require('es6-promise').Promise;
 
 // initializes routes on client / server (uses Director)
-module.exports.Router = require('./lib/router').Router;
+module.exports.router = require('./lib/router');
+
+// performance timing info
+module.exports.performance = require('./lib/performance');

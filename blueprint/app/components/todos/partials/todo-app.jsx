@@ -31,17 +31,24 @@ var TodoStore = isomorphic.require('stores/todo-store');
 /**
  * Retrieve the current TODO data from the TodoStore
  */
-function getTodoState() {
-  return {
-    allTodos: TodoStore.getAll(),
-    areAllComplete: TodoStore.areAllComplete()
-  };
+function getTodoState (todoList) {
+  if (todoList) {
+    return {
+      allTodos: TodoStore.getAll(todoList.id),
+      areAllComplete: TodoStore.areAllComplete(todoList.id)
+    };
+  } else {
+    return {
+      allTodos: [],
+      areAllComplete: false
+    };
+  }
 }
 
 var TodoApp = React.createClass({
 
   getInitialState: function() {
-    return getTodoState();
+    return getTodoState(this.props.todoList);
   },
 
   componentDidMount: function() {
@@ -58,7 +65,7 @@ var TodoApp = React.createClass({
   render: function() {
   	return (
       <div>
-        <Header />
+        <Header renderer={this.props.renderer} todoList={this.props.todoList} />
         <MainSection
           allTodos={this.state.allTodos}
           areAllComplete={this.state.areAllComplete}
@@ -72,7 +79,7 @@ var TodoApp = React.createClass({
    * Event handler for 'change' events coming from the TodoStore
    */
   _onChange: function() {
-    this.setState(getTodoState());
+    this.setState(getTodoState(this.props.todoList));
   }
 
 });

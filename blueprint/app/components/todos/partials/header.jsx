@@ -20,7 +20,9 @@ var isomorphic = require('isomorphic');
 var React = isomorphic.React;
 
 var TodoActions = isomorphic.require('actions/todo-actions');
+var TodoListActions = isomorphic.require('actions/todo-list-actions');
 var TodoTextInput = isomorphic.require('components/todos/partials/todo-text-input');
+var PagePerformance = isomorphic.require('components/partials/performance');
 
 var Header = React.createClass({
 
@@ -30,14 +32,19 @@ var Header = React.createClass({
   render: function() {
     return (
       <header id="header">
-        <h1>todos</h1>
+        <h1 onClick={this._goHome}>todos<span className={"header-plus"}>+</span></h1>
+        <PagePerformance renderer={this.props.renderer} />
         <TodoTextInput
           id="new-todo"
-          placeholder="What needs to be done?"
-          onSave={this._onSave}
+          placeholder={this.props.todoList ? this.props.todoList.id + '...' : "Enter list name..."}
+          onSave={this.props.todoList ? this._onSave : this._onSaveTitle}
         />
       </header>
     );
+  },
+
+  _goHome: function () {
+    isomorphic.router.setRoute('/');
   },
 
   /**
@@ -48,11 +55,18 @@ var Header = React.createClass({
    */
   _onSave: function(text) {
     if (text.trim()){
-      TodoActions.create(text);
+      TodoActions.create(this.props.todoList, text);
     }
+  },
 
+  /**
+   * @param {string} text
+   */
+  _onSaveTitle: function (text) {
+    if (text.trim()){
+      TodoListActions.create(text);
+    }
   }
-
 });
 
 module.exports = Header;
