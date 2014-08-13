@@ -1,13 +1,17 @@
 #!/usr/bin/env node
 
 var args = require('minimist')(process.argv.slice(2));
+var mkdirp = require('mkdirp');
+var os = require('os');
+var fs = require('fs');
+var path = require('path');
+
 var shell = require('shelljs');
 var cwd = shell.pwd();
-var ncp = require('ncp').ncp;
-var path = require('path');
 var fs = require('fs');
 var spawn = require('child_process').spawn;
 var chalk = require('chalk');
+
 var Insight = require('insight');
 
 var pkg = require('../package.json');
@@ -41,7 +45,7 @@ function init (optOut) {
 
   switch (args._[0]) {
   case validCommands.NEW:
-    createApplicationAt(args._[1]);
+    createApplicationAt(args._[1], args.todo);
     break;
   case validCommands.SERVER:
     spawn('gulp', ['server'], { stdio:'inherit' });
@@ -60,12 +64,12 @@ function init (optOut) {
  *
  * @param {String} location
  */
-function createApplicationAt (target) {
+function createApplicationAt (target, todoExample) {
   if (target) {
     target = path.join(cwd, target);
     emptyDirectory(target, function (empty) {
       if (empty) {
-        installApplicationAt(target);
+        installApplicationAt(target, todoExample);
       } else {
         console.log(target + ' already exists.')
       }
@@ -95,29 +99,126 @@ function emptyDirectory (path, fn) {
  *
  * @param {String} destination
  */
-function installApplicationAt (destination) {
-  var blueprint = path.resolve(path.join(__dirname, '..', 'blueprint'));
-  ncp(blueprint, destination, function (err) {
-    if (err) {
-      return console.error(err);
+function installApplicationAt (destination, todoExample) {
+  var appName = path.basename(path.resolve(destination));
+  process.on('exit', function(){
+      console.log(chalk.yellow.bold('cd ', appName, ' && npm install'));
+  })
+
+  mkdir(appName, function () {
+    copy('/../blueprint/base/gulpfile.js' , appName + '/gulpfile.js');
+    copy('/../blueprint/base/index.html' , appName + '/index.html');
+    copy('/../blueprint/base/package.json' , appName + '/package.json');
+    copy('/../blueprint/base/server.js' , appName + '/server.js');
+    mkdir(appName + '/app', function () {
+      copy('/../blueprint/base/app/client.js', appName + '/app/client.js');
+      mkdir(appName + '/app/dispatcher', function () {
+        copy('/../blueprint/base/app/dispatcher/app-dispatcher.js', appName + '/app/dispatcher/app-dispatcher.js');
+      });
+
+      if (todoExample) {
+        todoApplication(appName);
+      } else {
+        baseApplication(appName);
+      }
+    });
+
+    mkdir(appName + '/assets', function () {
+      if (todoExample) {
+        copyRecursiveSync(__dirname + '/../blueprint/todo-example/assets', appName + '/assets');
+      } else {
+        mkdir(appName + '/assets/images');
+        mkdir(appName + '/assets/stylesheets', function () {
+          mkdir(appName + '/assets/stylesheets/critical');
+          copy('/../blueprint/base/assets/stylesheets/isomorphic.styl', appName + '/assets/stylesheets/isomorphic.styl');
+        });
+      }
+    });
+  });
+}
+
+function baseApplication (appName) {
+  copy('/../blueprint/base/app/router.js', appName + '/app/router.js');
+  mkdir(appName + '/app/actions');
+  mkdir(appName + '/app/components', function () {
+    copy('/../blueprint/base/app/components/index.jsx', appName + '/app/components/index.jsx');
+  });
+  mkdir(appName + '/app/constants');
+  mkdir(appName + '/app/routes');
+  mkdir(appName + '/app/services');
+  mkdir(appName + '/app/stores');
+}
+
+function todoApplication (appName) {
+  copy('/../blueprint/todo-example/app/router.js', appName + '/app/router.js');
+  copyRecursiveSync(__dirname + '/../blueprint/todo-example/app/actions', appName + '/app/actions');
+  copyRecursiveSync(__dirname + '/../blueprint/todo-example/app/components', appName + '/app/components');
+  copyRecursiveSync(__dirname + '/../blueprint/todo-example/app/constants', appName + '/app/constants');
+  copyRecursiveSync(__dirname + '/../blueprint/todo-example/app/routes', appName + '/app/routes');
+  copyRecursiveSync(__dirname + '/../blueprint/todo-example/app/services', appName + '/app/services');
+  copyRecursiveSync(__dirname + '/../blueprint/todo-example/app/stores', appName + '/app/stores');
+  copyRecursiveSync(__dirname + '/../blueprint/todo-example/todomvc-common', appName + '/todomvc-common');
+}
+
+// function npmInstall (destination) {
+//   console.log(chalk.yellow('Changing directory to', destination, 'and Running NPM Install'));
+//   shell.cd(destination);
+//
+//   var npminstall = spawn('npm', ['install']);
+//   npminstall.stdout.on('data', function (data) {
+//     console.log('stdout: ' + data);
+//   });
+//
+//   npminstall.stderr.on('data', function (data) {
+//     console.log(chalk.red(data));
+//   });
+//
+//   npminstall.on('close', function (code) {
+//     console.log(chalk.green('Node modules installed.'));
+//   });
+// }
+
+function copy(from, to) {
+  from = path.join(__dirname, from);
+  write(to, fs.readFileSync(from, 'utf-8'));
+}
+
+function copyRecursiveSync (src, dest) {
+  var exists = fs.existsSync(src);
+  var stats = exists && fs.statSync(src);
+  var isDirectory = exists && stats.isDirectory();
+  if (exists && isDirectory) {
+    if (!fs.existsSync(dest)) {
+      mkdir(dest, function () {
+        fs.readdirSync(src).forEach(function(childItemName) {
+          copyRecursiveSync(path.join(src, childItemName), path.join(dest, childItemName));
+        });
+      });
     } else {
-      console.log(chalk.cyan('Application installed at', destination));
-      console.log(chalk.yellow('Changing directory to', destination, 'and Running NPM Install'));
-      shell.cd(destination);
-
-      var npminstall = spawn('npm', ['install']);
-      npminstall.stdout.on('data', function (data) {
-        console.log('stdout: ' + data);
-      });
-
-      npminstall.stderr.on('data', function (data) {
-        console.log(chalk.red(data));
-      });
-
-      npminstall.on('close', function (code) {
-        console.log(chalk.green('Node modules installed, running isomorphic server'));
-        spawn('gulp', ['server'], { stdio:'inherit' });
+      fs.readdirSync(src).forEach(function(childItemName) {
+        copyRecursiveSync(path.join(src, childItemName), path.join(dest, childItemName));
       });
     }
+  } else {
+    if (src.indexOf('.png') > 0) {
+      var inStr = fs.createReadStream(src);
+      var outStr = fs.createWriteStream(dest);
+      inStr.pipe(outStr);
+    } else {
+      write(dest, fs.readFileSync(src, 'utf-8'));
+    }
+  }
+}
+
+function write(path, str, mode) {
+  fs.writeFile(path, str, { mode: mode || 0666 });
+  console.log(chalk.green('create file: ', path))
+}
+
+function mkdir(path, fn) {
+  mkdirp(path, 0755, function(err){
+    if (err) throw err;
+    console.log(chalk.cyan('create directory: ', path))
+    fn && fn();
   });
 }

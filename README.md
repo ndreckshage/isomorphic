@@ -7,7 +7,9 @@ Command-line interface and project structure for building isomorphic webapps wit
 ######Install
 ```sh
 npm install -g isomorphic
-isomorphic new your-app
+isomorphic new your-app # isomorphic new your-app --todo (for example app)
+cd your-app && npm install
+isomorphic server
 ```
 Then go to [localhost:3030](http://localhost:3030)...or see it now at [isomorphic-todo.frontendperformance.com](http://isomorphic-todo.frontendperformance.com).
 
@@ -85,12 +87,12 @@ React, Flux and Jest are all Facebook creations. There are plenty of other great
 
 *NOTE: WORK IN PROGRESS.*
 
-ONLY `isomorphic new <app-name>` (which installs [todo example](http://isomorphic-todo.frontendperformance.com/)) and `isomorphic server` today.
+ONLY `isomorphic new <app-name>`, `isomorphic new <app-name> --todo` (which installs [todo example](http://isomorphic-todo.frontendperformance.com/)) and `isomorphic server` today.
 
 ```sh
 isomorphic new <app-name> <options...>
-  --example-todo (Default: false)
-  --example-crud (Default: false)
+  --todo (Default: false)
+  --crud (Default: false)
   --bower (Default: false)
 isomorphic init <app-name>
   aliases: i
