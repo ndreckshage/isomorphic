@@ -7,7 +7,7 @@ Command-line interface and project structure for building isomorphic webapps wit
 ######Install
 ```sh
 npm install -g isomorphic
-isomorphic new your-app # isomorphic new your-app --todo (for example app)
+isomorphic new your-app # --todo (for example app)
 cd your-app && npm install
 isomorphic server
 ```
@@ -166,17 +166,14 @@ isomorphic.performance;
 
 ### Example Application
 
-*WORK IN PROGRESS*
-
 - The example todo application can be seen at [isomorphic-todo.frontendperformance.com](http://isomorphic-todo.frontendperformance.com).
-- The example crud application can be seen at [isomorphic-crud.frontendperformance.com](http://isomorphic-crud.frontendperformance.com).
 
-`isomorphic new your-app --todo` and `isomorphic new your-app --crud` will install the example application.
+`isomorphic new your-app --todo` will install the example application.
 
 This application is:
 
 1. Isomorphic -- try disabling JavaScript.
-2. Highly performant -- look at network times. I've seen times under 100ms total (60ms server, 40ms client).
+2. Highly performant. I've seen times under **50ms total (48ms server, 2ms client)**.
 3. Proxies (readonly) APIs at [isomorphic-todo-api.frontendperformance.com](http://isomorphic-todo-api.frontendperformance.com) and [isomorphic-crud-api.frontendperformance.com](http://isomorphic-crud-api.frontendperformance.com).
 
 The todo example extends [TodoMVC](http://todomvc.com/architecture-examples/react/) to show a slightly more complex application with routing, and an API.
