@@ -173,7 +173,7 @@ isomorphic.performance;
 This application is:
 
 1. Isomorphic -- try disabling JavaScript.
-2. Highly performant. I've seen times under **50ms total (48ms server, 2ms client)**.
+2. Highly performant. I've seen times under **50ms total (40ms server, 10ms client)**.
 3. Proxies (readonly) APIs at [isomorphic-todo-api.frontendperformance.com](http://isomorphic-todo-api.frontendperformance.com) and [isomorphic-crud-api.frontendperformance.com](http://isomorphic-crud-api.frontendperformance.com).
 
 The todo example extends [TodoMVC](http://todomvc.com/architecture-examples/react/) to show a slightly more complex application with routing, and an API.
