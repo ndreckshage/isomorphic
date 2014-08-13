@@ -58,7 +58,7 @@ module.exports = React.createClass({
     return (
       <div className={"todo-lists"}>
         <h1>todos<span className={"header-plus"}>+</span></h1>
-        <PagePerformance render={this.props.renderer} />
+        <PagePerformance renderer={this.props.renderer} />
         <div className={"todo-list-links"}>
           {this.state.todoLists.map(function (todoList) {
             return <a href={"/todos/" + todoList.id} className={"todo-list"} key={todoList.id}>{todoList.id}</a>;

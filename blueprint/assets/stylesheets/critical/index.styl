@@ -1,2 +1,24 @@
-h1
-  color blue
+@import "../todos/overrides"
+
+.css-state
+  &:after
+    content 'Critical CSS.'
+    color #FF4136
+
+body
+  font 14px 'Helvetica Neue', Helvetica, Arial, sans-serif
+  line-height 1.4em
+  background #eaeaea url('images/bg.png')
+  color #4d4d4d
+  width 550px
+  margin 0 auto
+  font-smoothing antialiased
+
+#info
+  margin 65px auto 0
+  color #a6a6a6
+  font-size 12px
+  text-shadow 0 1px 0 rgba(255, 255, 255, 0.7)
+  text-align center
+  a
+    color inherit

@@ -32,7 +32,7 @@ module.exports = React.createClass({
   render: function () {
     var performance = <h2>rendered client-side</h2>;
     if (this.props.renderer === "server") {
-      performance = <h2>rendered server-side in {this.state.total}ms ({this.state.server}ms server, {this.state.client}ms client)</h2>;
+      performance = <h2>rendered server-side in {this.state.total}ms ({this.state.server}ms server, {this.state.client}ms client). <span className={"css-state"}></span></h2>;
     }
     return (
       <div>
