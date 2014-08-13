@@ -2,7 +2,7 @@
 
 ###_Work in Progress. Not Complete._
 
-Command-line interface and project structure for building isomorphic webapps with [React](http://facebook.github.io/react/) + [Flux](http://facebook.github.io/flux/).
+Command-line interface and project structure for building highly performant isomorphic webapps with [React](http://facebook.github.io/react/) + [Flux](http://facebook.github.io/flux/).
 
 ######Install
 ```sh
