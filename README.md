@@ -79,7 +79,6 @@ Frontend Node server uses express, with Stylus. This server will likely be relat
 Gulp is a stream-based build tool, which is simpler, and more efficient than Grunt. Gulp tasks are defined in outside of the project scaffold, but can be overwritten on a per app basis.
 
 ######Facebook...
-> "WHY SO MANY FACEBOOK TOOLS????" -- [Creator of Yet Another Framework](http://blog.tastejs.com/yet-another-framework-syndrome-yafs)
 
 React, Flux and Jest are all Facebook creations. There are plenty of other great tools out there. I've tried many to varying extents, and appreciate the simplicity + power of the Facebook stack. I think React is innovative, and a fun technology to use. There is also a huge benefit in knowing these tools are battle tested on one of the worlds most trafficked sites. These libraries are powerful, and committed to performance.
 
@@ -98,6 +97,10 @@ isomorphic init <app-name>
   aliases: i
 isomorphic server
   aliases: serve, s
+  --environment (Default: development)
+isomorphic build
+  aliases: b
+  --environment (Default: development)
 isomorphic gulp <task>
 isomorphic generate <type> <name>
 isomorphic help <name>

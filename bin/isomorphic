@@ -6,22 +6,21 @@ var os = require('os');
 var fs = require('fs');
 var path = require('path');
 
-var shell = require('shelljs');
-var cwd = shell.pwd();
 var fs = require('fs');
 var spawn = require('child_process').spawn;
 var chalk = require('chalk');
 
 var Insight = require('insight');
 
-var pkg = require('../package.json');
+var pkg = require('./../package.json');
 var version = pkg.version;
 
 var validCommands = {
   NEW: 'new',
   SERVER: 'server',
+  BUILD: 'build',
   GULP: 'gulp'
-};
+}
 
 var insight = new Insight({
   // Google Analytics tracking code
@@ -38,6 +37,7 @@ if (insight.optOut === undefined) {
   init(insight.optOut)
 }
 
+var Environment, environment;
 function init (optOut) {
   if (!optOut) {
     insight.track('IsomorphicCLI', 'init');
@@ -48,15 +48,49 @@ function init (optOut) {
     createApplicationAt(args._[1], args.todo);
     break;
   case validCommands.SERVER:
-    spawn('gulp', ['server'], { stdio:'inherit' });
+  case validCommands.BUILD:
+    Environment = require('./../lib/environment');
+    environment = new Environment();
+  case validCommands.SERVER:
+    validEnvironment(function (settings) {
+      spawn(validCommands.GULP, gulpArgs(validCommands.SERVER, settings), { stdio:'inherit' });
+    });
+    break;
+  case validCommands.BUILD:
+    validEnvironment(function (settings) {
+      spawn(validCommands.GULP, gulpArgs(validCommands.BUILD, settings), { stdio: 'inherit' });
+    });
     break;
   case validCommands.GULP:
-    var additional = args._[1] && args._[1] !== 'server' ? [args._[1]] : [];
-    spawn('gulp', additional, { stdio:'inherit' });
+    var additional = args._[1] && args._[1] !== validCommands.SERVER ? [args._[1]] : [];
+    spawn(validCommands.GULP, additional, { stdio:'inherit' });
     break;
   default:
     console.log(chalk.red('Please enter a valid argument.'));
   }
+}
+
+function validEnvironment (callback) {
+  if (environment.all[args.environment] || !args.environment) {
+    environment.activate(args.environment || environment.DEFAULT_ENVIRONMENT);
+    callback(environment.active);
+  } else {
+    console.log(chalk.red('Please enter a valid environment.'));
+  }
+}
+
+function gulpArgs (command) {
+  var gulpArgs = [command];
+  for (var key in environment.active) {
+    if (environment.active.hasOwnProperty(key)) {
+      if (typeof environment.active[key] === 'string') {
+        gulpArgs.push('--' + key + '=' + environment.active[key]);
+      } else {
+        gulpArgs.push('--' + key);
+      }
+    }
+  }
+  return gulpArgs;
 }
 
 /**
@@ -66,7 +100,7 @@ function init (optOut) {
  */
 function createApplicationAt (target, todoExample) {
   if (target) {
-    target = path.join(cwd, target);
+    target = path.join(process.cwd(), target);
     emptyDirectory(target, function (empty) {
       if (empty) {
         installApplicationAt(target, todoExample);
@@ -102,14 +136,16 @@ function emptyDirectory (path, fn) {
 function installApplicationAt (destination, todoExample) {
   var appName = path.basename(path.resolve(destination));
   process.on('exit', function(){
-      console.log(chalk.yellow.bold('cd ', appName, ' && npm install'));
+      console.log(chalk.yellow.bold('cd', appName, '&& npm install'));
   })
 
   mkdir(appName, function () {
-    copy('/../blueprint/base/gulpfile.js' , appName + '/gulpfile.js');
-    copy('/../blueprint/base/index.html' , appName + '/index.html');
-    copy('/../blueprint/base/package.json' , appName + '/package.json');
-    copy('/../blueprint/base/server.js' , appName + '/server.js');
+    copy('/../blueprint/base/gulpfile.js', appName + '/gulpfile.js');
+    copy('/../blueprint/base/index.html', appName + '/index.html');
+    copy('/../blueprint/base/package.json', appName + '/package.json');
+    copy('/../blueprint/base/server.js', appName + '/server.js');
+    copy('/../blueprint/base/.gitignore', appName + '/.gitignore');
+
     mkdir(appName + '/app', function () {
       copy('/../blueprint/base/app/client.js', appName + '/app/client.js');
       mkdir(appName + '/app/dispatcher', function () {
@@ -138,6 +174,7 @@ function installApplicationAt (destination, todoExample) {
 }
 
 function baseApplication (appName) {
+  copy('/../blueprint/base/environment.json', appName + '/environment.json');
   copy('/../blueprint/base/app/router.js', appName + '/app/router.js');
   mkdir(appName + '/app/actions');
   mkdir(appName + '/app/components', function () {
@@ -150,6 +187,7 @@ function baseApplication (appName) {
 }
 
 function todoApplication (appName) {
+  copy('/../blueprint/todo-example/environment.json', appName + '/environment.json');
   copy('/../blueprint/todo-example/app/router.js', appName + '/app/router.js');
   copyRecursiveSync(__dirname + '/../blueprint/todo-example/app/actions', appName + '/app/actions');
   copyRecursiveSync(__dirname + '/../blueprint/todo-example/app/components', appName + '/app/components');
@@ -159,24 +197,6 @@ function todoApplication (appName) {
   copyRecursiveSync(__dirname + '/../blueprint/todo-example/app/stores', appName + '/app/stores');
   copyRecursiveSync(__dirname + '/../blueprint/todo-example/todomvc-common', appName + '/todomvc-common');
 }
-
-// function npmInstall (destination) {
-//   console.log(chalk.yellow('Changing directory to', destination, 'and Running NPM Install'));
-//   shell.cd(destination);
-//
-//   var npminstall = spawn('npm', ['install']);
-//   npminstall.stdout.on('data', function (data) {
-//     console.log('stdout: ' + data);
-//   });
-//
-//   npminstall.stderr.on('data', function (data) {
-//     console.log(chalk.red(data));
-//   });
-//
-//   npminstall.on('close', function (code) {
-//     console.log(chalk.green('Node modules installed.'));
-//   });
-// }
 
 function copy(from, to) {
   from = path.join(__dirname, from);
@@ -212,13 +232,13 @@ function copyRecursiveSync (src, dest) {
 
 function write(path, str, mode) {
   fs.writeFile(path, str, { mode: mode || 0666 });
-  console.log(chalk.green('create file: ', path))
+  console.log(chalk.green('create file:', path))
 }
 
 function mkdir(path, fn) {
   mkdirp(path, 0755, function(err){
     if (err) throw err;
-    console.log(chalk.cyan('create directory: ', path))
+    console.log(chalk.cyan('create directory:', path))
     fn && fn();
   });
 }
