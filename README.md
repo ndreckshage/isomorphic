@@ -122,6 +122,9 @@ var isomorphic = require('isomorphic');
 isomorphic.React;
 isomorphic.Dispatcher;
 
+// environment support (build options; api config)
+isomorphic.environment;
+
 // client takes over server.
 isomorphic.isomorphize;
 
