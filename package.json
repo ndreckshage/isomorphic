@@ -1,6 +1,6 @@
 {
   "name": "isomorphic",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "tracking": "UA-53760519-2",
   "description": "command line utility for isomorphic webapps",
   "bin": {

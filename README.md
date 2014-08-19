@@ -86,8 +86,6 @@ React, Flux and Jest are all Facebook creations. There are plenty of other great
 
 *NOTE: WORK IN PROGRESS.*
 
-ONLY `isomorphic new <app-name>`, `isomorphic new <app-name> --todo` (which installs [todo example](http://isomorphic-todo.frontendperformance.com/)) and `isomorphic server` today.
-
 ```sh
 isomorphic new <app-name> <options...>
   --todo (Default: false)

@@ -5,6 +5,6 @@
   },
   {
     "name": "development",
-    "endpoint": "http://localhost:3031"
+    "endpoint": "http://isomorphic-todo-api.frontendperformance.com"
   }
 ]

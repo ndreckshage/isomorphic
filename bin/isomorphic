@@ -168,7 +168,7 @@ function installApplicationAt (destination, todoExample) {
     copy('/../blueprint/base/index.html', appName + '/index.html');
     copy('/../blueprint/base/package.json', appName + '/package.json');
     copy('/../blueprint/base/server.js', appName + '/server.js');
-    copy('/../blueprint/base/.gitignore', appName + '/.gitignore');
+    copy('/../blueprint/base/gitignore', appName + '/.gitignore');
 
     mkdir(appName + '/app', function () {
       copy('/../blueprint/base/app/client.js', appName + '/app/client.js');
@@ -224,7 +224,7 @@ function todoApplication (appName) {
 
 function copy(from, to) {
   from = path.join(__dirname, from);
-  write(to, fs.readFileSync(from, 'utf-8'));
+  write(from, to);
 }
 
 function copyRecursiveSync (src, dest) {
@@ -244,19 +244,15 @@ function copyRecursiveSync (src, dest) {
       });
     }
   } else {
-    if (src.indexOf('.png') > 0) {
-      var inStr = fs.createReadStream(src);
-      var outStr = fs.createWriteStream(dest);
-      inStr.pipe(outStr);
-    } else {
-      write(dest, fs.readFileSync(src, 'utf-8'));
-    }
+    write(src, dest);
   }
 }
 
-function write(path, str, mode) {
-  fs.writeFile(path, str, { mode: mode || 0666 });
-  console.log(chalk.green('create file:', path))
+function write (src, dest) {
+  var inStr = fs.createReadStream(src);
+  var outStr = fs.createWriteStream(dest);
+  inStr.pipe(outStr);
+  console.log(chalk.green('create file:', dest))
 }
 
 function mkdir(path, fn) {
