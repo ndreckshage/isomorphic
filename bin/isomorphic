@@ -17,6 +17,7 @@ var validCommands = {
   SERVER: 'server',
   BUILD: 'build',
   GULP: 'gulp',
+  HELP: 'help',
   VERSION: 'version'
 }
 
@@ -64,12 +65,33 @@ function init () {
       var additional = args._[1] && args._[1] !== validCommands.SERVER ? [args._[1]] : [];
       spawn(validCommands.GULP, additional, { stdio:'inherit' });
       break;
+    case validCommands.HELP:
+      printHelp();
+      break;
     case validCommands.VERSION:
       console.log(chalk.cyan('isomorphic version', pkg.version));
       break;
     default:
       console.log(chalk.red('Please enter a valid argument.'));
+      printHelp();
   }
+}
+
+function printHelp () {
+  console.log(chalk.cyan('isomorphic new <app-name> <options...>'));
+  console.log(chalk.cyan('  --todo (Default: false)'));
+  console.log(chalk.gray('  --crud (Default: false)'));
+  console.log(chalk.gray('  --bower (Default: false)'));
+  console.log(chalk.gray('isomorphic init <app-name>'));
+  console.log(chalk.cyan('isomorphic server'));
+  console.log(chalk.cyan('  --environment (Default: development)'));
+  console.log(chalk.cyan('isomorphic build'));
+  console.log(chalk.cyan('  --environment (Default: development)'));
+  console.log(chalk.cyan('isomorphic gulp <task>'));
+  console.log(chalk.gray('isomorphic generate <type> <name>'));
+  console.log(chalk.cyan('isomorphic help <name>'));
+  console.log(chalk.gray('isomorphic test'));
+  console.log(chalk.cyan('isomorphic version'));
 }
 
 function validEnvironment (callback) {

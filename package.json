@@ -1,6 +1,6 @@
 {
   "name": "isomorphic",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "tracking": "UA-53760519-2",
   "description": "command line utility for isomorphic webapps",
   "bin": {
@@ -39,9 +39,8 @@
     "flux": "git://github.com/ndreckshage/flux.git#master",
     "react": "~0.11.1",
     "request": "~2.39.0",
-    "superagent": "~0.18.2"
-  },
-  "devDependencies": {
+    "superagent": "~0.18.2",
+
     "browser-sync": "~1.3.3",
     "browserify": "~5.9.1",
     "chalk": "~0.5.1",

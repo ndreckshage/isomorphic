@@ -91,25 +91,18 @@ ONLY `isomorphic new <app-name>`, `isomorphic new <app-name> --todo` (which inst
 ```sh
 isomorphic new <app-name> <options...>
   --todo (Default: false)
-  --crud (Default: false)
-  --bower (Default: false)
-isomorphic init <app-name>
-  aliases: i
+  # --crud (Default: false)
+  # --bower (Default: false)
+# isomorphic init <app-name>
 isomorphic server
-  aliases: serve, s
   --environment (Default: development)
 isomorphic build
-  aliases: b
   --environment (Default: development)
 isomorphic gulp <task>
-isomorphic generate <type> <name>
-  aliases: g
+# isomorphic generate <type> <name>
 isomorphic help <name>
-  aliases: h, -h, --help
-isomorphic test
-  aliases: t
+# isomorphic test
 isomorphic version
-  aliases: v, -v, --version
 ```
 
 ###Wrapper (client/server)
