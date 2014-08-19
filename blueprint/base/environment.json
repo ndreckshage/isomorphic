@@ -1,10 +1,8 @@
 [
   {
-    "name": "production",
-    "endpoint": "http://isomorphic-todo-api.frontendperformance.com"
+    "name": "production"
   },
   {
-    "name": "development",
-    "endpoint": "http://localhost:3031"
+    "name": "development"
   }
 ]

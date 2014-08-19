@@ -103,6 +103,7 @@ isomorphic build
   --environment (Default: development)
 isomorphic gulp <task>
 isomorphic generate <type> <name>
+  aliases: g
 isomorphic help <name>
   aliases: h, -h, --help
 isomorphic test

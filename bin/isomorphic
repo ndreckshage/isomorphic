@@ -10,63 +10,65 @@ var fs = require('fs');
 var spawn = require('child_process').spawn;
 var chalk = require('chalk');
 
-var Insight = require('insight');
-
 var pkg = require('./../package.json');
-var version = pkg.version;
 
 var validCommands = {
   NEW: 'new',
   SERVER: 'server',
   BUILD: 'build',
-  GULP: 'gulp'
+  GULP: 'gulp',
+  VERSION: 'version'
 }
 
-var insight = new Insight({
-  // Google Analytics tracking code
-  trackingCode: pkg.tracking,
-  packageName: pkg.name,
-  packageVersion: pkg.version
-});
+// @TODO some basic tracking
+// var Insight = require('insight');
+// var insight = new Insight({
+//   // Google Analytics tracking code
+//   trackingCode: pkg.tracking,
+//   packageName: pkg.name,
+//   packageVersion: pkg.version
+// });
 
-if (insight.optOut === undefined) {
-  return insight.askPermission(null, function (err, optOut) {
-    init(optOut);
-  });
-} else {
-  init(insight.optOut)
-}
+// if (insight.optOut === undefined) {
+//   return insight.askPermission(null, function (err, optOut) {
+//     init(optOut);
+//   });
+// } else {
+//   init(insight.optOut)
+// }
+// if (!optOut) {
+//   insight.track('IsomorphicCLI', 'init');
+// }
 
 var Environment, environment;
-function init (optOut) {
-  if (!optOut) {
-    insight.track('IsomorphicCLI', 'init');
-  }
-
+function init () {
   switch (args._[0]) {
-  case validCommands.NEW:
-    createApplicationAt(args._[1], args.todo);
-    break;
-  case validCommands.SERVER:
-  case validCommands.BUILD:
-    Environment = require('./../lib/environment');
-    environment = new Environment();
-  case validCommands.SERVER:
-    validEnvironment(function (settings) {
-      spawn(validCommands.GULP, gulpArgs(validCommands.SERVER, settings), { stdio:'inherit' });
-    });
-    break;
-  case validCommands.BUILD:
-    validEnvironment(function (settings) {
-      spawn(validCommands.GULP, gulpArgs(validCommands.BUILD, settings), { stdio: 'inherit' });
-    });
-    break;
-  case validCommands.GULP:
-    var additional = args._[1] && args._[1] !== validCommands.SERVER ? [args._[1]] : [];
-    spawn(validCommands.GULP, additional, { stdio:'inherit' });
-    break;
-  default:
-    console.log(chalk.red('Please enter a valid argument.'));
+    case validCommands.NEW:
+      createApplicationAt(args._[1], args.todo);
+      break;
+    case validCommands.SERVER:
+    case validCommands.BUILD:
+      Environment = require('./../lib/environment');
+      environment = new Environment();
+    case validCommands.SERVER:
+      validEnvironment(function (settings) {
+        spawn(validCommands.GULP, gulpArgs(validCommands.SERVER, settings), { stdio:'inherit' });
+      });
+      break;
+    case validCommands.BUILD:
+      validEnvironment(function (settings) {
+        spawn(validCommands.GULP, gulpArgs(validCommands.BUILD, settings), { stdio: 'inherit' });
+      });
+      break;
+    case validCommands.GULP:
+      var additional = args._[1] && args._[1] !== validCommands.SERVER ? [args._[1]] : [];
+      spawn(validCommands.GULP, additional, { stdio:'inherit' });
+      break;
+    case validCommands.VERSION:
+      console.log(chalk.cyan('isomorphic version', pkg.version));
+      break;
+    default:
+      console.log(chalk.red('Please enter a valid argument.'));
   }
 }
 
@@ -242,3 +244,5 @@ function mkdir(path, fn) {
     fn && fn();
   });
 }
+
+init();
